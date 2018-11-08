@@ -4,8 +4,8 @@
 			<!-- Logo -->
 			<div class="logo_container d-flex flex-column align-items-center justify-content-center">
 				<div class="logo">
-					<a href="{{url('nuatthaihome')}}" class="text-center">
-						<div class="logo_title"><img src="/images/" alt=""></div>
+					<a href="{{url('/')}}" class="text-center">
+						<div class="logo_title" ><img src="{{asset('/images/officiallogo.png')}}" class="officiallogo" alt=""></div>
 					</a>
 				</div>
 			</div>
@@ -98,6 +98,10 @@
     color: #fff500;
     background-color: #04083a;
     border-color: #04083a;
+}
+.officiallogo{
+    margin-bottom:15px !important;
+    height: 85% !important;
 }
 a.nav-link.dropdown.profile {
    

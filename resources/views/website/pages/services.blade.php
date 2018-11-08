@@ -1,11 +1,9 @@
 @extends('website.master.template')
 @section('header')
-@foreach ($companyinformation as $companyinfo)
-    
-        <li><a href="{{ route('website_chose', $companyinfo->user_id) }}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>home</span></div></a></li>
-        <li><a href="{{ route('website_aboutus', $companyinfo->user_id) }}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
-        <li><a href="{{ url('website/pages/services')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>Services</span></div></a></li>
-        <li><a href="{{ url('website/pages/allreservation') }}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>reservation</span></div></a></li>
+        <li><a href="#"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>home</span></div></a></li>
+        <li><a href="#"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
+        <li><a href="#"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>Services</span></div></a></li>
+        <li><a href="#"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>reservation</span></div></a></li>
         <li class="profile-hov"> <div class="nav_item d-flex flex-column align-items-center justify-content-center">
 @endsection
 @section('content')
@@ -157,5 +155,4 @@ article.card.servicesper {
     </div>
   </div>
 </div>
-@endforeach
 @endsection
