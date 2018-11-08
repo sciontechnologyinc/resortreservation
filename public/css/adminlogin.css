@@ -1,0 +1,16 @@
+a.nav-link {
+    display: none;
+}
+
+.card {
+    border: 0px !important;
+    background: transparent;
+}
+
+.card-header {
+    opacity: 0;
+}
+
+nav.navbar.navbar-expand-md.navbar-light.navbar-laravel {
+    opacity: 0;
+}

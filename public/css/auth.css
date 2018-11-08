@@ -1,0 +1,79 @@
+a.navbar-brand {
+    display: none;
+}
+
+.card-header {
+    background-color: #171717;
+    border-bottom: none !important;
+}
+
+.card-header {
+    background: none;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+main.py-4 {
+    background-image: url(/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: -webkit-fill-available;
+    background-position: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none !important;
+}
+
+input#email {
+    background-color: #ffffff;
+    color: black;
+    outline: none;
+}
+
+input#contacno {
+    background-color: #ffffff;
+    color: black;
+    outline: none;
+}
+
+input#password {
+    background-color: #ffffff;
+    color: black;
+    outline: none;
+}
+
+input#name {
+    background-color: #ffffff;
+    color: black;
+    outline: none;
+}
+
+input#password-confirm {
+    background-color: #ffffff;
+    color: black;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1B95E0;
+    border-color: transparent;
+}
+
+.btn-link {
+    color: red!important;
+}
+
+.btn-link:hover {
+    color: #866000 !important;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #654800 !important;
+    border-color: #654800 !important;
+}
