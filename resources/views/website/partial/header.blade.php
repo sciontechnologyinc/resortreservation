@@ -103,6 +103,7 @@
     margin-bottom:15px !important;
     height: 85% !important;
 }
+
 a.nav-link.dropdown.profile {
    
     color: white !important;

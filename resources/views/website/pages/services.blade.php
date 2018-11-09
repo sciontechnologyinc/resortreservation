@@ -119,17 +119,20 @@ article.card.servicesper {
   </div>
 </div>
 @endforeach
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 <div class="container services">
   <h2></h2>
    <section class="customer-logos slider">
-      <div class="slide"><img src="/images/slider1.jpg"></div>
-      <div class="slide"><img src="/images/slider2.jpg"></div>
-      <div class="slide"><img src="/images/slider3.jpg"></div>
-      <div class="slide"><img src="/images/slider4.jpg"></div>
-      <div class="slide"><img src="/images/slider5.jpg"></div>
-      <div class="slide"><img src="/images/slider6.jpg"></div>
-      <div class="slide"><img src="/images/slider7.jpg"></div>
-      <div class="slide"><img src="/images/slider8.jpg"></div>
+      <div class="slide"><img src="/images/image1.jpg"></div>
+      <div class="slide"><img src="/images/image2.jpg"></div>
+      <div class="slide"><img src="/images/image3.jpg"></div>
+      <div class="slide"><img src="/images/image4.jpg"></div>
+      <div class="slide"><img src="/images/image5.jpg"></div>
+      <div class="slide"><img src="/images/image6.jpg"></div>
+      <div class="slide"><img src="/images/image7.jpg"></div>
+      <div class="slide"><img src="/images/image8.jpg"></div>
+      <div class="slide"><img src="/images/image9.jpg"></div>
+      <div class="slide"><img src="/images/image10.jpg"></div>
    </section>
 </div>
 
