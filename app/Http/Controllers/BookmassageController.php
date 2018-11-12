@@ -144,6 +144,7 @@ class BookmassageController extends Controller
         $time = date_format(date_create($request->resvtime),"H:i:s");
         $bkms = new Bookmassage();
         $bkms->fullname = $request->fullname;
+        $bkms->user_id = Auth::user()->id;
         $bkms->contactno =  $request->contactno;
         $bkms->noofreservation =  $request->noofreservation;
         $bkms->noofhours =  $request->noofhours;

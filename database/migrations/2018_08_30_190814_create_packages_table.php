@@ -17,7 +17,7 @@ class CreatePackagesTable extends Migration
             $table->increments('id');
             $table->string('user_id')->nullable();
             $table->string('packagecode');
-            $table->string('packagedescription');
+            $table->text('packagedescription');
             $table->string('price');
             $table->string('photo');
             $table->timestamps();

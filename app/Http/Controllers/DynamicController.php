@@ -61,11 +61,6 @@ class DynamicController extends Controller
         return view('website.pages.home', ['companyinformation' => $companyinformation]);
     }
 
-    public function reservation($id)
-    {
-        $companyinformation = Companyinformation::where("user_id",$id)->orderBy('id')->get();
-        return view('website.pages.home', ['companyinformation' => $companyinformation]);
-    }
 
     public function adminlogo($id)
     {
