@@ -8,7 +8,7 @@
  //Best practice is to create a separate file for handling connection to database
  try{
      
-     $link = new \PDO(   'mysql:host=127.0.0.1;dbname=nuat_thai;charset=utf8mb4', 
+     $link = new \PDO(   'mysql:host=127.0.0.1;dbname=resortreservation;charset=utf8mb4', 
                         'root', 
                         '', 
                         array(
@@ -195,7 +195,7 @@
  try{
       // Creating a new connection.
      // Replace your-hostname, your-db, your-username, your-password according to your database
-     $link = new \PDO(   'mysql:host=127.0.0.1;dbname=nuat_thai;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
+     $link = new \PDO(   'mysql:host=127.0.0.1;dbname=resortreservation;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
                         'root', //'root',
                         '', //'',
                         array(
