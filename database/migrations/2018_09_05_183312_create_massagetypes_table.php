@@ -16,7 +16,7 @@ class CreateMassagetypesTable extends Migration
         Schema::create('massagetypes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('massagetypename');
-            $table->string('massagetypedescription');
+            $table->text('massagetypedescription');
             $table->string('price');
             $table->timestamps();
         });

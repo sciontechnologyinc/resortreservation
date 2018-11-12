@@ -38,7 +38,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#maintenance" aria-expanded="false" aria-controls="maintenance">
               <i class="menu-icon mdi mdi-settings"></i>
               <span class="menu-title">Maintenance</span>
@@ -54,7 +54,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="{{ url('companyinfo') }}">
               <i class="menu-icon mdi mdi-information-outline"></i>

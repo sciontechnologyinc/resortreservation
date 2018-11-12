@@ -8,6 +8,7 @@ class Bookmassage extends Model
 {
     protected $table="bookmassages";
 	protected $fillable = [
+        'user_id',
         'fullname',
         'contactno',
         'noofreservation',

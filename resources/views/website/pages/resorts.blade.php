@@ -109,7 +109,7 @@
                         </div>
                     </div>
                         <div class="back">
-                                <h2>{{$companyinformation->companyname}}</h2>
+                                <center><h2>{{$companyinformation->companyname}}</h2><center>
                                 <p>
                                         <center><h4 class="rc-name"></h4></center>
                                         <center><p class="rc-address">{{$companyinformation->address}}</p></center>

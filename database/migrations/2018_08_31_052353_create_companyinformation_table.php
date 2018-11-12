@@ -17,8 +17,8 @@ class CreateCompanyinformationTable extends Migration
             $table->increments('id');
             $table->string('user_id');
             $table->string('companyname')->nullable();
-            $table->string('mission')->nullable();
-            $table->string('vision')->nullable();
+            $table->text('mission')->nullable();
+            $table->text('vision')->nullable();
             $table->string('contactno')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();

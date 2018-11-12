@@ -19,11 +19,6 @@
         <li><a href="{{ url('/') }}">Resorts</a></li>
 @endsection
 
-@section('personalsettings')
-        <a class="nav-link" href="{{ route('website_reservation', $companyinfo->user_id) }}"><i class="fa fa-user"></i> Reservations</a>
-        <a class="nav-link" href=""><i class="fa fa-cog"></i> Settings</a>
-@endsection
-
 @section('content')
 <header>
     

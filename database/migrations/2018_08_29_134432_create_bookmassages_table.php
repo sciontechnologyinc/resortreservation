@@ -15,6 +15,7 @@ class CreateBookmassagesTable extends Migration
     {
         Schema::create('bookmassages', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_id')->nullable();
             $table->string('fullname');
             $table->string('contactno');
             $table->string('noofreservation');
