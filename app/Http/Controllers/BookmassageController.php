@@ -198,9 +198,7 @@ class BookmassageController extends Controller
         Nexmo::message()->send([
             'to'   => $request->contactno,
             'from' => 'SJDMB',
-            'text' => 'Date: '.$date.' '.$time. '            '.
-                      'Package: ' .$request->package. '                                     '.
-                      '# of Reservation: ' .$request->noofreservation.'                                    '
+            'text' => 'Reservation Complete !: '.$date.' '.$time.''
         ]);
         $bkms->save();
         return redirect('/bookmassages')->with('success','Updated successfuly');
