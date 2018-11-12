@@ -4,8 +4,8 @@
 			<!-- Logo -->
 			<div class="logo_container d-flex flex-column align-items-center justify-content-center">
 				<div class="logo">
-					<a href="{{url('/')}}" class="text-center">
-						<div class="logo_title" ><img src="{{asset('/images/officiallogo.png')}}" class="officiallogo" alt=""></div>
+                    <a href="{{url('/')}}" class="text-center">
+                        @yield('headerLogo')
 					</a>
 				</div>
 			</div>

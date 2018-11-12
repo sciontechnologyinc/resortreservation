@@ -111,9 +111,12 @@
                         <div class="back">
                                 <h2>Lorem Ipsum</h2>
                                 <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                        <center><h4 class="rc-name">{{$companyinformation->companyname}}</h4></center>
+                                        <center><p class="rc-address">{{$companyinformation->address}}</p></center>
+                                        <center><p class="rc-address">{{$companyinformation->contactno}}</p></center>
+                                        <center><p class="rc-address">{{$companyinformation->email}}</p></center>
                                 </p>
-                                <button type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Select Resort</button>
+                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Select Resort</a></center>
                             </div>
                     </div>
                 </div>

@@ -1,4 +1,7 @@
 @extends('website.master.template')
+@section('headerLogo')
+    HEADERHEADERHEADERHEADERHEADER
+@endsection
 
 @section('header')
 @foreach ($companyinformation as $companyinfo)
