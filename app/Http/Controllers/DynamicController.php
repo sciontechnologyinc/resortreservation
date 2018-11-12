@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Companyinformation;
+use App\Packages;
 class DynamicController extends Controller
 {
     /**
@@ -44,7 +45,6 @@ class DynamicController extends Controller
     }
     public function services($id)
     {
-        // $packages = Packages::orderBy('id')->get();
         $packages = Packages::where("user_id",$id)->orderBy('id')->get();
         return view('website.pages.services', ['packages' => $packages]);
     }

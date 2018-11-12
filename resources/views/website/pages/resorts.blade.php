@@ -109,9 +109,9 @@
                         </div>
                     </div>
                         <div class="back">
-                                <h2>Lorem Ipsum</h2>
+                                <h2>{{$companyinformation->companyname}}</h2>
                                 <p>
-                                        <center><h4 class="rc-name">{{$companyinformation->companyname}}</h4></center>
+                                        <center><h4 class="rc-name"></h4></center>
                                         <center><p class="rc-address">{{$companyinformation->address}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->contactno}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->email}}</p></center>

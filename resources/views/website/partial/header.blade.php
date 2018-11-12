@@ -3,10 +3,8 @@
 
 			<!-- Logo -->
 			<div class="logo_container d-flex flex-column align-items-center justify-content-center">
-				<div class="logo">
-                    <a href="{{url('/')}}" class="text-center">
+				<div class="logo" style="color: wheat">
                         @yield('headerLogo')
-					</a>
 				</div>
 			</div>
       
