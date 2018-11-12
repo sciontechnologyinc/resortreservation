@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +14,7 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 .info-card {
-    float: left;
-	margin: 10px;
+   
 	-webkit-perspective: 600px;
 }
 
@@ -42,9 +40,11 @@
 	width: 100%;
 	height: 300px;
 	-webkit-transform: rotateY(-180deg);
-	overflow: scroll;
+	
 }
-
+[type=reset], [type=submit], button, html [type=button] {
+    -webkit-appearance: none;
+}
 .info-card:hover .back {
 	-webkit-transform: rotateY(0);
 }
@@ -52,10 +52,15 @@
 .info-card:hover .front {
 	-webkit-transform: rotateY(180deg);
 }
-      body {
-            background-image: url('/images/background.png');
-            background-color: #cccccc;
-            }
+body {
+    background-image: url(/images/resort_bg.jpg);
+    background-color: #cccccc;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: -webkit-fill-available;
+    background-attachment: fixed;
+}
     h2{
         color: white;
     }
@@ -63,12 +68,15 @@
     border: 0.5px solid #b7b6b61a !important;
     background-color: transparent !important;
     }
-    p.rc-address {
+  p.rc-address {
     color: #d9edf7;
-    }
+    font-size: 18px;
+}
     h4.rc-name {
     color: #d9edf7;
-    }
+    font-size: 28px;
+}
+
     .thumbnail:hover {
     border: 0.5px solid #b7b6b6 !important;
     }
@@ -92,6 +100,11 @@
     padding: 20px 0px;
     font-size: 40px;
     }
+    h2.flip-cname {
+    text-align: center;
+    font-size: 30px;
+    padding: 20px 0px;
+}
     .navbar-laravel {
     background-color: transparent;
     -webkit-box-shadow: none !important;
@@ -104,8 +117,13 @@ a.nav-link {
     font-size: 15px;
     color: white !important;
 }
+.overlay {
+    height: -webkit-fill-available;
+    background: rgba(0,0,0,0.5);
+}
   </style>
 </head>
+<div class="overlay">
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -154,7 +172,7 @@ a.nav-link {
         </div>
     </nav>
 <body background="red">
-
+       
 <div class="container">
         
   <h2 class="resorts-title">Resorts</h2>
@@ -171,14 +189,14 @@ a.nav-link {
                         </div>
                     </div>
                         <div class="back">
-                                <h2>{{$companyinformation->companyname}}</h2>
+                                <h2 class="flip-cname">{{$companyinformation->companyname}}</h2>
                                 <p>
                                         <center><h4 class="rc-name"></h4></center>
                                         <center><p class="rc-address">{{$companyinformation->address}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->contactno}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->email}}</p></center>
                                 </p>
-                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Select Resort</a></center>
+                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Reserve</a></center>
                             </div>
                     </div>
                 </div>
@@ -186,7 +204,7 @@ a.nav-link {
              @endforeach
         </div>
 </div>
-
+</div>
 </body>
 <script>
     $(document).ready(function(){
