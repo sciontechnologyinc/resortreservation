@@ -44,9 +44,9 @@ class DynamicController extends Controller
     }
     public function services($id)
     {
-        $packages = Packages::orderBy('id')->get();
-        $companyinformation = Companyinformation::where("user_id",$id)->orderBy('id')->get();
-        return view('website.pages.aboutus', ['companyinformation' => $companyinformation]);
+        // $packages = Packages::orderBy('id')->get();
+        $packages = Packages::where("user_id",$id)->orderBy('id')->get();
+        return view('website.pages.services', ['packages' => $packages]);
     }
     /**
      * Display the specified resource.

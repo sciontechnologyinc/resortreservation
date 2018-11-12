@@ -11,7 +11,7 @@ Route::prefix('websites')->group(function(){
     Route::get          ('/resortlists',                 'DynamicController@resortlists'          )->name('website_resorts');
     Route::get          ('/aboutus/{id}',                'DynamicController@aboutus'              )->name('website_aboutus');
     Route::get          ('/services/{id}',               'DynamicController@services'             )->name('website_services');
-    Route::get          ('/showadmin/{id}',              'DynamicController@adminlogo'            )->name('website_services');
+    Route::get          ('/showadmin/{id}',              'DynamicController@adminlogo'            )->name('website_servicesss');
 });
                     //Company Information 
 Route::prefix('companyinfo')->group(function(){

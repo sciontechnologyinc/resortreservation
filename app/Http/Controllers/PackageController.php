@@ -5,7 +5,7 @@ use App\Bookmassage;
 use App\Packages;
 use Calendar;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -118,6 +118,7 @@ class PackageController extends Controller
         $package->packagedescription = $request->input('packagedescription');
         $package->price = $request->input('price');
         $package->photo = $fileNameToStore;
+        $package->user_id = Auth::user()->id;
         $package->save();
 
          return redirect()->back()->with('success','Added successfuly');
