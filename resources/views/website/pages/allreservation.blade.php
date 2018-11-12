@@ -1,11 +1,24 @@
 @extends('website.master.template')
+@foreach ($companyinformation as $companyinfo)
+@section('headerLogo')
+    {{$companyinfo->companyname}}
+@endsection
+
 @section('header')
         <li><a href="{{ route('website_chose', $companyinfo->user_id) }}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>home</span></div></a></li>
         <li><a href="{{ route('website_aboutus', $companyinfo->user_id) }}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
-        <li><a href="{{ url('website_services',$companyinfo->user_id)}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>Services</span></div></a></li>
+        <li><a href="{{ url('websites/services/'.$companyinfo->user_id)}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>Services</span></div></a></li>
         <li><a href="{{ url('/') }}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>Resorts</span></div></a></li>
         <li class="profile-hov"> <div class="nav_item d-flex flex-column align-items-center justify-content-center">
 @endsection
+
+@section('header2')
+        <li><a href="{{ route('website_chose', $companyinfo->user_id) }}">Home</a></li>
+        <li><a href="{{ route('website_aboutus', $companyinfo->user_id) }}">About us</a></li>
+        <li><a href="{{ route('website_services', $companyinfo->user_id)}}">Services</a></li>
+        <li><a href="{{ url('/') }}">Resorts</a></li>
+@endsection
+@endforeach
 @section('content')
 <div class="container reservation-page">
     <div class="reservation-title mx-0 px-0">RESERVATIONS</div>

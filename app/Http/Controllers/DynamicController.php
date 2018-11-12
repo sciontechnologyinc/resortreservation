@@ -45,8 +45,9 @@ class DynamicController extends Controller
     }
     public function services($id)
     {
+        $companyinformation = Companyinformation::where("user_id",$id)->orderBy('id')->get();
         $packages = Packages::where("user_id",$id)->orderBy('id')->get();
-        return view('website.pages.services', ['packages' => $packages]);
+        return view('website.pages.services', ['packages' => $packages, 'companyinformation' => $companyinformation]);
     }
     /**
      * Display the specified resource.
@@ -55,6 +56,12 @@ class DynamicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        $companyinformation = Companyinformation::where("user_id",$id)->orderBy('id')->get();
+        return view('website.pages.home', ['companyinformation' => $companyinformation]);
+    }
+
+    public function reservation($id)
     {
         $companyinformation = Companyinformation::where("user_id",$id)->orderBy('id')->get();
         return view('website.pages.home', ['companyinformation' => $companyinformation]);

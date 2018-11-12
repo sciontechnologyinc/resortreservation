@@ -20,8 +20,7 @@
                     </a>
                     @if ($user = Auth::user())
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="{{ url('website/pages/reservation') }}"><i class="fa fa-user"></i> Reservations</a>
-                        <a class="nav-link" href="{{ route('users.edit',$user) }}"><i class="fa fa-cog"></i> Settings</a>
+                        @yield('personalsettings')
                             <a class="nav-link" href="{{ url('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
