@@ -59,6 +59,10 @@
                                  <div class="form-group">
                                  {!!Form::label('fullname', 'Full Name', array('class' => 'form-control-label'))!!}
                                  {!!Form::text('fullname', Auth::user()->name , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly' => '' ])!!}
+                               @foreach ($companyinformation as $companyinfo)
+                                 {!!Form::text('user_id', $companyinfo->user_id , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly' => '','hidden' ])!!}
+                               @endforeach
+
                                  </div>
                                  <div class="form-group">
                                  {!!Form::label('contactno', 'Contact No', array('class' => 'form-control-label'))!!}

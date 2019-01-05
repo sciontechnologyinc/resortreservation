@@ -23,18 +23,27 @@ Route::prefix('companyinfo')->group(function(){
     Route::post         ('/update/{id}/save',            'TeacherController@update'               )->name('teacher_update');
     Route::post         ('/delete/{id}',                 'TeacherController@destroy'              )->name('teacher_destroy');
 });
-
+                    // Resorts
 Route::prefix('resorts')->group(function(){
     Route::get          ('/',                            'AccountController@index'                )->name('website');
     Route::get          ('/add',                         'AccountController@create'               )->name('resort_add');
-    Route::post         ('/save',                        'AccountController@store'                 )->name('teacher_store');
+    Route::post         ('/save',                        'AccountController@store'                )->name('teacher_store');
     Route::get          ('/update/{id}',                 'AccountController@edit'                 )->name('teacher_edit');
     Route::post         ('/update/{id}/save',            'AccountController@update'               )->name('teacher_update');
     Route::post         ('/delete/{id}',                 'AccountController@destroy'              )->name('teacher_destroy');
 });
+                // Galleries
+Route::prefix('galleries')->group(function(){
+    Route::get          ('/',                            'GalleryController@index'                )->name('gallery');
+    Route::get          ('/show',                        'GalleryController@show'                 )->name('gallery_show');
+    Route::get          ('/create',                      'GalleryController@create'               )->name('gallery_create');
+    Route::post         ('/store',                       'GalleryController@store'                )->name('gallery_store');
+    Route::get          ('/{id}/edit',                   'GalleryController@edit'                 )->name('gallery_edit');
+    Route::patch         ('/{id}/save',                   'GalleryController@update'               )->name('gallery_update');
+    Route::post         ('/delete/{id}',                 'GalleryController@destroy'              )->name('gallery_destroy');
+});                
 
 Route::get('/','DynamicController@index');
-
 Route::post('bookmassage/{id}/{amount}/{date}','BookmassageController@updateStatus');
 
 Route::get('paypalform', function () {
@@ -163,7 +172,7 @@ Route::get('profile', function () {
 Auth::routes();
 Route::get('bookmassages','BookmassageController@index');
 Route::post('bookmassages/update','BookmassageController@update');
-Route::get('bookmassages/create','PackageController@packagesdropdown');
+Route::get('bookmassages/create/{id}','PackageController@packagesdropdown');
 Route::get('website/pages/reservation','BookmassageController@reservation');
 Route::get('website/pages/allreservation','BookmassageController@allreservation');
 Route::get('website/pages/services','PackageController@services');

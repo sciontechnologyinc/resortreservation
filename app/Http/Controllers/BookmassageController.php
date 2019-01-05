@@ -22,7 +22,7 @@ class BookmassageController extends Controller
     public function index()
     {
         $events = Packages::join('bookmassages', 'bookmassages.package', '=', 'packages.packagecode')
-            ->get();
+            ->where('bookmassages.user_id',Auth::user()->id)->get();
         $event_list = [];
         foreach($events as $key => $event) {
             $event_list[] = Calendar::event(
@@ -144,7 +144,7 @@ class BookmassageController extends Controller
         $time = date_format(date_create($request->resvtime),"H:i:s");
         $bkms = new Bookmassage();
         $bkms->fullname = $request->fullname;
-        $bkms->user_id = Auth::user()->id;
+        $bkms->user_id = $request->user_id;;
         $bkms->contactno =  $request->contactno;
         $bkms->noofreservation =  $request->noofreservation;
         $bkms->noofhours =  $request->noofhours;

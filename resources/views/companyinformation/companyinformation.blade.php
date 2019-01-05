@@ -69,7 +69,7 @@
                                   <input id="photo" name="photo" class="photo" type="file" accept="image/x-png,image/gif,image/jpeg">
                                 </div>
                                 <div class="row">
-                                  <img class="pre_img logoImage" style="max-width:100%;height:200px" src="https://yourprogramming.com/library/images/no_img.jpg">
+                                  <img class="pre_img" style="max-width:100%;height:200px" src="/images/{{$companyinformation->photo}}">
                                   <p class="image_view"></p><img src="" >
                                 </div>
                     </div> 

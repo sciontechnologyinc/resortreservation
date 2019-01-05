@@ -21,7 +21,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
 
     /**
@@ -69,6 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'contactno' => $data['contacno'],
+            'admin' => $data['admin'],
             'password' => Hash::make($data['password']),
         ]);
     }

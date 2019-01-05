@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Bookmassage;
 use App\Packages;
+use App\Companyinformation;
 use Calendar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -30,9 +31,9 @@ class PackageController extends Controller
     }
 
 
-    public function packagesdropdown()
+    public function packagesdropdown($id)
     {
-        $events = Bookmassage::where("status", "=", "Pending")->get();
+        $events = Bookmassage::orWhere('user_id',$id)->get();
         $event_list = [];
         foreach($events as $key => $event) {
             $date = date_format(date_create($event->datetime),"Y/m/d H:i:s");
@@ -65,16 +66,18 @@ class PackageController extends Controller
                 $('[name=resvtime]').val(date.format('HH:mm:ss'));
             }"
         ]);
-	    $packages = Packages::orderBy('id')->get();
-        return view('bookmassages/create', ['bookmassages' => $bookmassages, 'packages' => $packages]);
-    }
+        $packages = Packages::where('user_id',$id)->orderBy('id')->get();
+        $companyinformation = Companyinformation::where('user_id',$id)->orderBy('id')->get();
 
+        return view('bookmassages/create', ['bookmassages' => $bookmassages, 'packages' => $packages , 'companyinformation' => $companyinformation]);
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('packages.addpackage');
@@ -105,7 +108,7 @@ class PackageController extends Controller
 
         $extension = $request->file('photo')->getClientOriginalExtension();
 
-        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        $fileNameToStore = $filename.'.'.$extension;
         
         $path = $request->file('photo')->storeAs('public/uploads', $fileNameToStore);
     }else{

@@ -17364,8 +17364,11 @@
     /* Sidebar */
     
     .sidebar {
+        background: #173654 !important;
+    }
+    
+    .sidebar {
         min-height: calc(100vh - 63px);
-        background: #ffffff;
         font-family: "Poppins", sans-serif;
         padding: 0;
         width: 255px;
@@ -17397,7 +17400,7 @@
         padding: 16px 35px;
         white-space: nowrap;
         height: 52px;
-        color: #866000;
+        color: #aaa782;
     }
     
     .sidebar .nav .nav-item .nav-link i.menu-arrow {
@@ -17659,7 +17662,7 @@
     
     .navbar.default-layout {
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(120deg, #00e4d0, #5983e8);
+        background: #173654;
         transition: background 0.25s ease;
         -webkit-transition: background 0.25s ease;
         -moz-transition: background 0.25s ease;
@@ -21164,15 +21167,15 @@
     }
     
     .navbar.default-layout .navbar-brand-wrapper {
-        background: #191200 !important;
+        background: #f4f6f7 !important;
     }
     
     .navbar.default-layout {
-        background: linear-gradient(120deg, #000000, #866000) !important;
+        background: #173654 !important;
     }
     
     .sidebar {
-        background: #000000 !important;
+        background: #173654 !important;
     }
     
     .sidebar .nav:not(.sub-menu)>.nav-item:hover:not(.nav-profile)>.nav-link {
@@ -21181,7 +21184,7 @@
     }
     
     .sidebar .nav .nav-item .nav-link .menu-icon {
-        color: #866000 !important;
+        color: #aaa782 !important;
     }
     
     .status-indicator.online {
@@ -21190,8 +21193,8 @@
     
     .btn-success {
         color: #fff;
-        background-color: #de9f00;
-        border-color: #de9f00;
+        background-color: #143455;
+        border-color: #143455;
     }
     
     .sidebar .nav .nav-item.active>.nav-link {

@@ -15,7 +15,6 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 .info-card {
-    float: left;
 	margin: 10px;
 	-webkit-perspective: 600px;
 }
@@ -33,7 +32,8 @@
 	width: 100%;
 	height: 300px;
 	position: absolute;
-	z-index: 1;
+    z-index: 1;
+    text-align: center; 
 }
 
 .back {
@@ -42,7 +42,6 @@
 	width: 100%;
 	height: 300px;
 	-webkit-transform: rotateY(-180deg);
-	overflow: scroll;
 }
 
 .info-card:hover .back {
@@ -52,10 +51,14 @@
 .info-card:hover .front {
 	-webkit-transform: rotateY(180deg);
 }
-      body {
-            background-image: url('/images/background.png');
-            background-color: #cccccc;
-            }
+body {
+    background-image: url(/images/front-bg.jpg);
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
     h2{
         color: white;
     }
@@ -65,10 +68,12 @@
     }
     p.rc-address {
     color: #d9edf7;
-    }
+    font-size: 18px;
+}
     h4.rc-name {
     color: #d9edf7;
-    }
+    font-size: 28px;
+}
     .thumbnail:hover {
     border: 0.5px solid #b7b6b6 !important;
     }
@@ -92,6 +97,11 @@
     padding: 20px 0px;
     font-size: 40px;
     }
+    h2.flip-cname {
+    text-align: center;
+    font-size: 30px;
+    padding: 20px 0px;
+}
     .navbar-laravel {
     background-color: transparent;
     -webkit-box-shadow: none !important;
@@ -104,8 +114,14 @@ a.nav-link {
     font-size: 15px;
     color: white !important;
 }
+.overlay {
+    background: rgba(0,0,0,0.6);
+    height: -webkit-fill-available;
+}
+
   </style>
 </head>
+<div class="overlay">
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -153,10 +169,9 @@ a.nav-link {
             </div>
         </div>
     </nav>
-<body background="red">
-
+   
+<body>
 <div class="container">
-        
   <h2 class="resorts-title">Resorts</h2>
         <div class="row">
             @foreach($companyinformations as $companyinformation)
@@ -164,14 +179,14 @@ a.nav-link {
                 <div class="info-card">
                     <div class="thumbnail">
                         <div class="front">
-                        <img src="{{asset('storage/uploads/').'/'.$companyinformation->photo}}" alt="Resort Logo" style="width:100%">
+                        <img src="/images/{{$companyinformation->photo}}" alt="Resort Logo" style="width:100%">
                         <div class="caption">
                             <center><h4 class="rc-name">{{$companyinformation->companyname}}</h4></center>
                             <center><p class="rc-address">{{$companyinformation->address}}</p></center>
                         </div>
                     </div>
                         <div class="back">
-                                <center><h2>{{$companyinformation->companyname}}</h2><center>
+                                <center><h2 class="flip-cname">{{$companyinformation->companyname}}</h2><center>
                                 <p>
                                         <center><h4 class="rc-name"></h4></center>
                                         <center><p class="rc-address">{{$companyinformation->address}}</p></center>
@@ -188,6 +203,7 @@ a.nav-link {
 </div>
 
 </body>
+</div>
 <script>
     $(document).ready(function(){
       

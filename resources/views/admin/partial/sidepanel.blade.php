@@ -27,8 +27,11 @@
                   <a class="nav-link" href="staffs">Staffs</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('galleries/show') }}">Galleries</a>
+                  </li>
+                {{-- <li class="nav-item">
                   <a class="nav-link" href="massagetypes">Services</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                   <a class="nav-link" href="packages">Packages</a>
                 </li>

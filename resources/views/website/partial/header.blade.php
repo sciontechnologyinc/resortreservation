@@ -129,36 +129,5 @@ a.nav-link.dropdown.profile {
 </style>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-  @if ($user = Auth::user())
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Please proceed to Reservation</p>
-      </div>
-      <div class="modal-footer">
-	  	<a href="/bookmassages/create"><button type="button" class="btn btn-success">Proceed</button></a>
-	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-    @else
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Please register or login to continue</p>
-      </div>
-      <div class="modal-footer">
-	  	<a href="{{ route('login') }}"><button type="button" class="btn btn-success">Log In</button></a>
-		<a href="{{ route('register') }}"><button type="button" class="btn btn-default">Register</button></a>
-      </div>
-    </div>
-    @endif
-  </div>
-</div>
+
 

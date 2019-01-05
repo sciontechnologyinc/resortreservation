@@ -21,45 +21,79 @@
 
 @section('content')
 <header>
+        <header>
     
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('/images/image4.jpg')">
-            <div class="carousel-caption d-none d-md-block">
-            </div>
-          </div>
-          <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('/images/image5.jpg')">
-            <div class="carousel-caption d-none d-md-block">
-            </div>
-          </div>
-          <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('/images/image6.jpg')">
-            <div class="carousel-caption d-none d-md-block">
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </header>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner" role="listbox">
+                        @forelse ($galleries as $index => $gallery)
+                            @if($index == 0)
+                                <div class="carousel-item active" style="background-image: url('/images/{{$gallery->photo}}')">
+                                    <div class="carousel-caption d-none d-md-block"></div>
+                                </div>
+                            @else
+                            <div class="carousel-item" style="background-image: url('/images/{{$gallery->photo}}')">
+                                    <div class="carousel-caption d-none d-md-block"></div>
+                            </div>
+                            @endif
+
+                            @empty
+                            <div class="carousel-item active" style="background-image: url('/images/defaultslide.jpg')">
+                                <div class="carousel-caption d-none d-md-block"></div>
+                            </div>
+                        @endforelse
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </header>
 
 <div class="container">
 
 </div>
-
+<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        @if ($user = Auth::user())
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Please proceed to Reservation</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/bookmassages/create/{{$companyinfo->user_id}}"><button type="button" class="btn btn-success">Proceed</button></a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+          @else
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Please register or login to continue</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('login') }}"><button type="button" class="btn btn-success">Log In</button></a>
+              <a href="{{ route('register') }}"><button type="button" class="btn btn-default">Register</button></a>
+            </div>
+          </div>
+          @endif
+        </div>
+    </div>
+    
 <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Companyinformation;
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,6 +19,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $companyinformations = Companyinformation::where('user_id','>' ,'1')->orderBy('id')->get();
+        return view('website.pages.resorts', ['companyinformations' => $companyinformations]);
     }
 }

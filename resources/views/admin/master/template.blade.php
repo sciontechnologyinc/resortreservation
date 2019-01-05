@@ -41,20 +41,19 @@
   <script src="js/dashboard.js"></script>
   <script>
       $(document).ready( function () {
-        $('#table_id').DataTable();
-        // if({{ Auth::user()->admin != 2 }}){
-        //     $('.resorts').hide();
-        // }else{
+        if({{ Auth::user()->admin}} != 2){
+            $('.resorts').hide();
+        }else{
 
-        // }
+        }
         $.ajax({
-            url:'websites/showadmin/'+{{ Auth::user()->id }},
+            url:'/websites/showadmin/'+{{ Auth::user()->id }},
             method:'GET',
             data:{},
             success: function(response){
                 var websites = response.companyinformation[0];
-                $('.companyLogo').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
-                $('.logoImage').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
+                    $('.companyLogo').attr('src',"/images/"+websites.photo);
+                    $('.logoImage').attr('src',"/images/"+websites.photo);
             }
         });
     });
