@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 .info-card {
-	margin: 10px;
+   
 	-webkit-perspective: 600px;
 }
 
@@ -42,8 +41,11 @@
 	width: 100%;
 	height: 300px;
 	-webkit-transform: rotateY(-180deg);
+	
 }
-
+[type=reset], [type=submit], button, html [type=button] {
+    -webkit-appearance: none;
+}
 .info-card:hover .back {
 	-webkit-transform: rotateY(0);
 }
@@ -52,11 +54,12 @@
 	-webkit-transform: rotateY(180deg);
 }
 body {
-    background-image: url(/images/front-bg.jpg);
+    background-image: url(/images/resort_bg.jpg);
     background-color: #cccccc;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    height: -webkit-fill-available;
     background-attachment: fixed;
 }
     h2{
@@ -66,7 +69,7 @@ body {
     border: 0.5px solid #b7b6b61a !important;
     background-color: transparent !important;
     }
-    p.rc-address {
+  p.rc-address {
     color: #d9edf7;
     font-size: 18px;
 }
@@ -115,10 +118,9 @@ a.nav-link {
     color: white !important;
 }
 .overlay {
-    background: rgba(0,0,0,0.6);
     height: -webkit-fill-available;
+    background: rgba(0,0,0,0.5);
 }
-
   </style>
 </head>
 <div class="overlay">
@@ -169,8 +171,8 @@ a.nav-link {
             </div>
         </div>
     </nav>
-   
-<body>
+<body background="red">
+       
 <div class="container">
   <h2 class="resorts-title">Resorts</h2>
         <div class="row">
@@ -186,14 +188,14 @@ a.nav-link {
                         </div>
                     </div>
                         <div class="back">
-                                <center><h2 class="flip-cname">{{$companyinformation->companyname}}</h2><center>
+                                <h2 class="flip-cname">{{$companyinformation->companyname}}</h2>
                                 <p>
                                         <center><h4 class="rc-name"></h4></center>
                                         <center><p class="rc-address">{{$companyinformation->address}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->contactno}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->email}}</p></center>
                                 </p>
-                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Select Resort</a></center>
+                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Reserve</a></center>
                             </div>
                     </div>
                 </div>
@@ -201,7 +203,7 @@ a.nav-link {
              @endforeach
         </div>
 </div>
-
+</div>
 </body>
 </div>
 <script>

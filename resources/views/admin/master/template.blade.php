@@ -52,8 +52,8 @@
             data:{},
             success: function(response){
                 var websites = response.companyinformation[0];
-                    $('.companyLogo').attr('src',"/images/"+websites.photo);
-                    $('.logoImage').attr('src',"/images/"+websites.photo);
+                $('.companyLogo').attr('src',"{!! asset('storage/app/public/uploads/"+websites.photo+"')!!}");
+                $('.logoImage').attr('src',"{!! asset('storage/app/public/uploads/"+websites.photo+"')!!}");
             }
         });
     });
