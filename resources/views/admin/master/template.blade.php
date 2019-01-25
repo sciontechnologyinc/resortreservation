@@ -29,7 +29,7 @@
                         <div class="container-fluid page-body-wrapper">
                         @include('admin.partial.sidepanel')
                         @yield('content')
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,8 +52,8 @@
             data:{},
             success: function(response){
                 var websites = response.companyinformation[0];
-                $('.companyLogo').attr('src',"{!! asset('storage/app/public/uploads/"+websites.photo+"')!!}");
-                $('.logoImage').attr('src',"{!! asset('storage/app/public/uploads/"+websites.photo+"')!!}");
+                $('.companyLogo').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
+                $('.logoImage').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
             }
         });
     });

@@ -108,13 +108,12 @@ class PackageController extends Controller
 
         $extension = $request->file('photo')->getClientOriginalExtension();
 
-        $fileNameToStore = $filename.'.'.$extension;
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
         
         $path = $request->file('photo')->storeAs('public/uploads', $fileNameToStore);
     }else{
-        $fileNameToStore = 'user_icon.png';
+        $fileNameToStore = 'default_logo.png';
     }
-
     
         $package = new Packages;
         $package->packagecode = $request->input('packagecode');

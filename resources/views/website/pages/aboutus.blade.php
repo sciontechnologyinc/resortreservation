@@ -38,14 +38,6 @@
           <h3 class="mvs">Vision</h3>
           <center><p class="vision">{{$companyinfo->vision}}</p></center>
       </div>  
-    <div class="aboutmain">
-        <h3 class="loc">Location</h3>
-        <p class="loc2"> <b></b>{{$companyinfo->address}}<i> </i> </p>
-        <div class="nt_gmap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.18998419844064!2d121.02091388489778!3d14.710344364049392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b11799f5a5bf%3A0xd007e2008613fdea!2sNuat+Thai!5e0!3m2!1sen!2sph!4v1535485215614" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
-    </div>
-
 </div> 
 @endforeach
 
@@ -75,10 +67,10 @@
                 <div class="col-lg-5 footer_col">
                     <div class="footer_menu">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="{{ url('nuatthaihome')}}">Home</a></li>
-                            <li><a href="{{ url('nuatthaiaboutus')}}">About us</a></li>
-                            <li><a href="{{ url('website/pages/services')}}">Services</a></li>
-                            <li><a href="{{ url('website/pages/allreservation') }}">Reservation</a></li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Reservation</a></li>
                         </ul>
                         <div class="footer_menu_text">
                             <center><p id="footerText">{{$companyinfo->footerinformation}}</p></center>

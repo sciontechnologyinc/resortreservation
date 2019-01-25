@@ -17,10 +17,10 @@
                     <div class="col-lg-5 footer_col">
                         <div class="footer_menu">
                             <ul class="d-flex flex-row align-items-start justify-content-start">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Reservation</a></li>
+                                <li><a href="">Home</a></li>
+                                <li><a href="">About us</a></li>
+                                <li><a href="">Services</a></li>
+                                <li><a href="">Reservation</a></li>
                             </ul>
                             <div class="footer_menu_text">
                                 <p id="footerText"></p>
