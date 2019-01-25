@@ -56,14 +56,20 @@ class CompanyinformationController extends Controller
            'photo' => 'image|nullable'
        ]);
        if($request->hasFile('photo')){
+            
         $filenameWithExt = $request->file('photo')->getClientOriginalName();
+
         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
         $extension = $request->file('photo')->getClientOriginalExtension();
-        $fileNameToStore = $filename.'.'.$extension;
+
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        
         $path = $request->file('photo')->storeAs('public/uploads', $fileNameToStore);
-        }else{
-            $fileNameToStore = 'user_icon.png';
-        }
+    }else{
+        $fileNameToStore = 'default_logo.png';
+    }
+
         if (Companyinformation::where('user_id', '=', $request->input('user_id'))->exists()) {
             $companyinformation = Companyinformation::where('user_id', $id)->firstOrFail();
             $companyinformation->companyname = $request->input('companyname');

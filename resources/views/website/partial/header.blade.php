@@ -87,11 +87,11 @@
 
 		
 <style>
-    .btn-success {
-        color: #fff;
-        background-color: #04083a;
-        border-color: #04083a;
-	}
+.btn-success {
+    color: #fff;
+    background-color: #04083a;
+    border-color: #04083a;
+}
 	.btn-success:hover {
     color: #fff500;
     background-color: #04083a;

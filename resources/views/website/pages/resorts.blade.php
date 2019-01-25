@@ -181,7 +181,7 @@ a.nav-link {
                 <div class="info-card">
                     <div class="thumbnail">
                         <div class="front">
-                        <img src="/images/{{$companyinformation->photo}}" alt="Resort Logo" style="width:100%">
+                        <img src="{{asset('storage/uploads/'.$companyinformation->photo)}}" alt="Resort Logo" style="width:100%">
                         <div class="caption">
                             <center><h4 class="rc-name">{{$companyinformation->companyname}}</h4></center>
                             <center><p class="rc-address">{{$companyinformation->address}}</p></center>
@@ -195,7 +195,7 @@ a.nav-link {
                                         <center><p class="rc-address">{{$companyinformation->contactno}}</p></center>
                                         <center><p class="rc-address">{{$companyinformation->email}}</p></center>
                                 </p>
-                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">Reserve</a></center>
+                                <center> <a type="button" class="btn btn-info" href="{{ route('website_chose', $companyinformation->user_id) }}">View</a></center>
                             </div>
                     </div>
                 </div>

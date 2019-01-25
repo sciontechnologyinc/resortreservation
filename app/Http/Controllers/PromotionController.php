@@ -53,16 +53,16 @@ class PromotionController extends Controller
         if($request->hasFile('photo')){
             
             $filenameWithExt = $request->file('photo')->getClientOriginalName();
-
+    
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-
+    
             $extension = $request->file('photo')->getClientOriginalExtension();
-
+    
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             
             $path = $request->file('photo')->storeAs('public/uploads', $fileNameToStore);
         }else{
-            $fileNameToStore = 'user_icon.png';
+            $fileNameToStore = 'default_logo.png';
         }
 
         

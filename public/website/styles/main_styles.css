@@ -278,7 +278,7 @@
     .button {
         width: 181px;
         height: 50px;
-        background: #080f74;
+        background: #00508e;
         -webkit-transition: all 200ms ease;
         -moz-transition: all 200ms ease;
         -ms-transition: all 200ms ease;
@@ -333,7 +333,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: #081123;
+        background: #00a0f3;
         z-index: 100;
     }
     
@@ -348,7 +348,7 @@
         left: 0;
         width: 265px;
         height: 100%;
-        background: #080f74 !important;
+        background: #00508e !important;
         z-index: 1;
     }
     
@@ -432,7 +432,7 @@
     
     .main_nav ul li.active,
     .main_nav ul li:hover {
-        background: #080f74;
+        background: #00508e;
     }
     
     .main_nav ul li a {
@@ -1628,7 +1628,7 @@
     }
     
     .card.about1 {
-        background-image: url(/images/background.png);
+        /* background-image: url(/images/background.png); */
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
