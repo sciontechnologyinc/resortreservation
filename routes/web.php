@@ -39,9 +39,14 @@ Route::prefix('galleries')->group(function(){
     Route::get          ('/create',                      'GalleryController@create'               )->name('gallery_create');
     Route::post         ('/store',                       'GalleryController@store'                )->name('gallery_store');
     Route::get          ('/{id}/edit',                   'GalleryController@edit'                 )->name('gallery_edit');
-    Route::patch         ('/{id}/save',                   'GalleryController@update'               )->name('gallery_update');
+    Route::patch         ('/{id}/save',                   'GalleryController@update'              )->name('gallery_update');
     Route::post         ('/delete/{id}',                 'GalleryController@destroy'              )->name('gallery_destroy');
-});                
+});   
+    // Notification
+Route::prefix('notification')->group(function(){
+    Route::get          ('/',                            'DynamicController@notification'         )->name('gallery');
+    Route::post         ('/update',                      'DynamicController@notificationupdate'   )->name('gallery');
+});  
 
 Route::get('/','DynamicController@index');
 Route::post('bookmassage/{id}/{amount}/{date}','BookmassageController@updateStatus');

@@ -69,7 +69,7 @@
                                   <input id="photo" name="photo" class="photo" type="file" accept="image/x-png,image/gif,image/jpeg">
                                 </div>
                                 <div class="row">
-                                  <img class="pre_img" style="max-width:100%;height:200px" src="/images/{{$companyinformation->photo}}">
+                                  <img class="pre_img" style="max-width:100%;height:200px" src="{{asset('storage/uploads/').'/'.$companyinformation->photo}}">
                                   <p class="image_view"></p><img src="" >
                                 </div>
                     </div> 

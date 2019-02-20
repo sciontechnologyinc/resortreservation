@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Companyinformation;
 use App\Gallery;
+use App\User;
 use App\Packages;
+use App\Bookmassage;
 class DynamicController extends Controller
 {
     /**
@@ -97,8 +99,16 @@ class DynamicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function notification()
     {
-        //
+        $notification = User::where("notification",'0')->orderBy('created_at')->get();
+        $reservation = Bookmassage::where("notification",'0')->orderBy('created_at')->get();
+        return response()->json(['success' => true, 'notification' => $notification,'reservation' => $reservation]);
+    }
+    
+    public function notificationupdate()
+    {
+        $notification = User::where('notification', '0')->update(request()->all());
+        $reservation = Bookmassage::where('notification', '0')->update(request()->all());
     }
 }

@@ -11,7 +11,25 @@
       @yield('headerButton')
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown d-none d-xl-inline-block">
+              <span class="profile-text nav-link">
+                  @if ( App\User::where('notification', '0')->count() == '0' && App\Bookmassage::where('notification', '0')->count() == '0' )
+                    <div class="dropdown">
+                        <i class="fa fa-bell dropbtn" onclick="myFunction()"><span><small style="position:absolute">0</small></span></i></span>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="#">No Notification</a>
+                        </div>
+                    </div>
+                  @else
+                    <div class="dropdown">
+                      <i class="fa fa-bell dropbtn" onclick="myFunction()" style="color:red"><span><small style="position:absolute">{{ App\User::where('notification', '0')->count() + App\Bookmassage::where('notification', '0')->count() }}</small></span></i></span>
+                        <div id="myDropdown" class="dropdown-content">
+                         
+                        </div>
+                    </div>
+                  @endif
+
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            
             <span class="profile-text">Hello, {{ Auth::user()->name }}!</span>
               <img class="img-xs rounded-circle companyLogo" src="{!! asset('images/default-user.png') !!}" alt="Profile image">
             </a>

@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{!! asset('vendors/css/vendor.bundle.addons.css') !!}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
     <script src="{!! asset('website/vendor/jquery/jquery.min.js') !!}"></script>
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <style>
@@ -19,6 +21,10 @@
             height: 60px !important;
             width: 140px !important;
         }
+        .nav-link{
+            display: -webkit-inline-box !important;
+        }
+        
     </style>
 </head>
 <body>
@@ -41,6 +47,11 @@
   <script src="js/dashboard.js"></script>
   <script>
       $(document).ready( function () {
+        $.ajaxSetup({
+      headers: {
+        'X-CSSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
         if({{ Auth::user()->admin}} != 2){
             $('.resorts').hide();
         }else{
@@ -56,6 +67,45 @@
                 $('.logoImage').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
             }
         });
+        $('.fa-bell').click(function(){
+            $.ajax({
+                url:'notification',
+                method:'GET',
+                dataType: 'json',
+                data:{},
+                success:function(response){
+                    var n = response.notification;
+                    var i = response.reservation;
+                    $('#myDropdown').empty();
+                    for(x=0; x<n.length; x++){
+                        if(n[x].admin=='1'){
+                            var j = 'Resort';
+                        }else{
+                            var j = 'Member';
+                        }
+                        $('#myDropdown').append('<a href="#">'+n[x].name+' Registered as '+ j +'</a>')
+                    }
+                    for(j=0; j<i.length;j++){
+                        $('#myDropdown').append('<a href="#">'+i[j].fullname+' Reserved '+ i[j].package +'</a>')
+                    }
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url:'notification/update',
+                            method:'POST',
+                            data:{
+                                notification:'1'
+                            },
+                            success: function(data){
+                                $('.fa-bell').css('color','white');
+                                $('small').text('0');
+                            }
+                        });
+                }
+            });
+        })
+       
     });
   </script>
 </html>

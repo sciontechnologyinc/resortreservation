@@ -14,6 +14,7 @@ class Bookmassage extends Model
         'noofreservation',
         'status',
         'amount',
+        'notification',
         'datepay',
         'datetime',
         'noofhours',
