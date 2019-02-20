@@ -197,7 +197,7 @@ class BookmassageController extends Controller
         $bkms->datetime = $date.' '.$time;
         $bkms->status = $request->status;
         Nexmo::message()->send([
-            'to'   => $request->contactno,
+            'to'   => '639215128314',
             'from' => 'SJDMB',
             'text' => 'Reservation Complete !: '.$date.' '.$time.''
         ]);

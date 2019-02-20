@@ -2,10 +2,10 @@
 
 @section('headerButton')
             <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="{{ url('galleries/show') }}" class="nav-link">Gallery</a>
                     </li>
-                    <li class="nav-item  active">
+                    <li class="nav-item">
                         <a href="{{ url('galleries/create') }}" class="nav-link">Add Gallery</a>
                     </li>
             </ul>
@@ -47,7 +47,7 @@
                       @foreach($galleries as $index => $gallery)
                       <tr>
                           <td>{{ ++$index}}</td>
-                          <td><img src="/images/{{$gallery->photo}}" ></td>
+                          <td><img src="{{asset('storage/uploads/').'/'.$gallery->photo}}" ></td>
                           <td>
                           <center>
                           <div class="form-group" style="display:inline-flex">

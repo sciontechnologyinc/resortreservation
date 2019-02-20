@@ -19,6 +19,14 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
+    public function notification(){
+         
+        $notification->update('1');
+        $galleries = Gallery::where("user_id",Auth::user()->id)->orderBy('id')->get();
+
+        return view('gallery.index', compact('galleries'))->with('success','Updated successfuly');
+    }
+
     public function update(User $user)
     { 
         if(Auth::user()->email == request('email')) {

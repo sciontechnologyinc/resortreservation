@@ -23,39 +23,32 @@
 <header>
         <header>
     
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner" role="listbox">
-                        @forelse ($galleries as $index => $gallery)
-                            @if($index == 0)
-                                <div class="carousel-item active" style="background-image: url('/images/{{$gallery->photo}}')">
-                                    <div class="carousel-caption d-none d-md-block"></div>
-                                </div>
-                            @else
-                            <div class="carousel-item" style="background-image: url('/images/{{$gallery->photo}}')">
-                                    <div class="carousel-caption d-none d-md-block"></div>
-                            </div>
-                            @endif
-
-                            @empty
-                            <div class="carousel-item active" style="background-image: url('/images/defaultslide.jpg')">
-                                <div class="carousel-caption d-none d-md-block"></div>
-                            </div>
-                        @endforelse
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @foreach ($galleries as $galery)
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="{{ $loop->first ? ' active' : '' }}"></li>
+                    @endforeach
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    @foreach ($galleries as $galery)
+                        <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{!! asset('storage/uploads/'.$galery->photo)!!}')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3></h3>
+                        </div>
+                    </div>
+                  @endforeach
+                 
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
               </header>
 
 <div class="container">
@@ -137,12 +130,6 @@
                 <!-- Footer Menu -->
                 <div class="col-lg-5 footer_col">
                     <div class="footer_menu">
-                        <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Reservation</a></li>
-                        </ul>
                         <div class="footer_menu_text">
                             <center><p id="footerText">{{$companyinfo->footerinformation}}</p></center>
                         </div>
@@ -168,19 +155,19 @@
 </footer>
 @endsection
 
-<script>
-        $(document).ready( function () {
-            $('#table_id').DataTable();
-            // $.ajax({
-            //     url:'websites/1',
-            //     method:'GET',
-            //     data:{},
-            //     success: function(response){
-            //         console.table(response);
-            //     }
-            // });
-        });
-</script>
 @section('scripts')
 
+<script>
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+        // $.ajax({
+        //     url:'websites/1',
+        //     method:'GET',
+        //     data:{},
+        //     success: function(response){
+        //         console.table(response);
+        //     }
+        // });
+    });
+</script>
 @endsection
