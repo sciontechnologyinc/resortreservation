@@ -104,6 +104,7 @@ class DynamicController extends Controller
         $notification = User::where("notification",'0')->orderBy('created_at')->get();
         $reservation = Bookmassage::where("notification",'0')->orderBy('created_at')->get();
         return response()->json(['success' => true, 'notification' => $notification,'reservation' => $reservation]);
+        
     }
     
     public function notificationupdate()
