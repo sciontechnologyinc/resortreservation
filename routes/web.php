@@ -39,9 +39,21 @@ Route::prefix('galleries')->group(function(){
     Route::get          ('/create',                      'GalleryController@create'               )->name('gallery_create');
     Route::post         ('/store',                       'GalleryController@store'                )->name('gallery_store');
     Route::get          ('/{id}/edit',                   'GalleryController@edit'                 )->name('gallery_edit');
-    Route::patch         ('/{id}/save',                   'GalleryController@update'              )->name('gallery_update');
+    Route::patch        ('/{id}/save',                   'GalleryController@update'               )->name('gallery_update');
     Route::post         ('/delete/{id}',                 'GalleryController@destroy'              )->name('gallery_destroy');
 });   
+
+// Amount
+Route::prefix('amount')->group(function(){
+    Route::post          ('/{id}',                        'BookmassageController@amount'            )->name('gallery');
+    Route::get          ('/show',                        'GalleryController@show'                 )->name('gallery_show');
+    Route::get          ('/create',                      'GalleryController@create'               )->name('gallery_create');
+    Route::post         ('/store',                       'GalleryController@store'                )->name('gallery_store');
+    Route::get          ('/{id}/edit',                   'GalleryController@edit'                 )->name('gallery_edit');
+    Route::patch        ('/{id}/save',                   'GalleryController@update'               )->name('gallery_update');
+    Route::post         ('/delete/{id}',                 'GalleryController@destroy'              )->name('gallery_destroy');
+}); 
+
     // Notification
 Route::prefix('notification')->group(function(){
     Route::get          ('/',                            'DynamicController@notification'         )->name('gallery');
@@ -113,6 +125,7 @@ Route::get('addstaff', function () {
     return view('staffs.addstaff');
 });
 Route::resource('staffs','StaffController');
+Route::resource('resorts','AccountController');
 
 Route::get('massagetypes', function () {
     return view('massagetypes.massagetypes');

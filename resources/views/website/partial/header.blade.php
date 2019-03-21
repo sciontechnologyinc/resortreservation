@@ -15,9 +15,9 @@
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-center justify-content-start">
 									@yield('header')
-                    <a class="nav-link dropdown profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-top: 20px;">
-                     <i class="fa fa-user"></i>
-                    </a>
+                    {{-- <a class="nav-link dropdown profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-top: 20px;">
+                        <i class="fa fa-user"></i>
+                    </a> --}}
                     @if ($user = Auth::user())
                     <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{ url('website/pages/reservation') }}"><i class="fa fa-user"></i> Reservations</a>
@@ -40,7 +40,8 @@
 								</ul>
 							</nav>
               
-							<a data-toggle="modal" data-target="#myModal" id="bookmassagebtn" class="button_container header_button ml-auto"><div class="button text-center"><span>Reserve Now!</span></div></a>
+							<a href="/bookmassages/create/{{$companyinfo->user_id}}" id="bookmassagebtn" class="button_container header_button ml-auto">
+                                <div class="button text-center"><span>Reserve Now!</span></div></a>
 							<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>           
 </nav>
 </div>
@@ -73,13 +74,13 @@
                                 </form>
                     </div>
                         @else
-                        <div class="user-menu dropdown-menu">
+                <div class="user-menu dropdown-menu">
                             <a class="nav-link profilebtn" href="{{ url('login') }}"><i class="fa fa-user"></i> Login</a>
                         @endif
                        
           
                 </div>   </li>
-                    <li><a class="bookmassage-btn"data-toggle="modal" data-target="#myModal">Reserve Now!</a></li>
+                    <li><a class="bookmassage-btn" data-toggle="modal" data-target="#myModal">Reserve Now!</a></li>
                 </ul>
             </div>
             

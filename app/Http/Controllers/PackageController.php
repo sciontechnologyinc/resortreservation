@@ -36,12 +36,13 @@ class PackageController extends Controller
         $events = Bookmassage::orWhere('user_id',$id)->get();
         $event_list = [];
         foreach($events as $key => $event) {
-            $date = date_format(date_create($event->datetime),"Y/m/d H:i:s");
+            $date = date_format(date_create($event->start_date),"Y/m/d H:i:s");
+            $end_date = date_format(date_create($event->end_date),"Y/m/d H:i:s");
             $event_list[] = Calendar::event(
-                'Not Available',
+                'Reserved',
                 false,
                 $date,
-                $date.'+'.$event->noofhours.'hour'
+                $end_date
             );
         }
         $bookmassages = Calendar::addEvents($event_list);
@@ -51,25 +52,25 @@ class PackageController extends Controller
             "selectable" => true,
             "height"=> "auto",
             // "minTime" =>  "10:00:00",
-            "hiddenDays"=> [ 6, 0 ],
             // "maxTime" => "18:00:00",
             "header"=> [
                 "right"=> 'prevYear,prev,next,nextYear',
-                "left"=> 'month,agendaWeek,agendaDay,today',
+                "left"=> 'month,agendaWeek,today',
                 "center"=> 'title'
             ]
         ])
         ->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
             "dayClick" => "function(date, jsEvent, view) {
                 $('#reserve').modal('show'); 
-                $('[name=resvdate]').val(date.format('YYYY-MM-DD'));
-                $('[name=resvtime]').val(date.format('HH:mm:ss'));
+                $('[name=from]').val(date.format('YYYY-MM-DD'));
+                $('[name=to]').val(date.format('YYYY-MM-DD'));
             }"
         ]);
         $packages = Packages::where('user_id',$id)->orderBy('id')->get();
         $companyinformation = Companyinformation::where('user_id',$id)->orderBy('id')->get();
+        $paypalamount = Bookmassage::latest()->limit(1)->get();   
 
-        return view('bookmassages/create', ['bookmassages' => $bookmassages, 'packages' => $packages , 'companyinformation' => $companyinformation]);
+        return view('bookmassages/create', ['bookmassages' => $bookmassages, 'packages' => $packages , 'companyinformation' => $companyinformation, 'paypalamount' => $paypalamount]);
     }
 
     /**

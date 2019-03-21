@@ -39,7 +39,7 @@
                           <td>
                           <div class="form-group" style="display:inline-flex">
                           <a rel="tooltip" title="Edit" class="btn btn-success btn-sm mr-1" href="accounts/{!! $account->id !!}/edit"><i class="fa fa-edit"></i></a>
-                          {!! Form::open(['id' => 'deleteForm', 'method' => 'DELETE', 'url' => '/accounts/' . $account->id]) !!}
+                          {!! Form::open(['id' => 'deleteForm', 'method' => 'DELETE', 'url' => '/resorts/' . $account->id]) !!}
                           {{ Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'rel' => 'tooltip', 'title' => 'Delete'] )  }}
                           {!! Form::close() !!}
                           </div>

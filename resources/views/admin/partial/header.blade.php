@@ -1,18 +1,32 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="dashboard">
-          <img src='' class="companyLogo"/>
+          <img src="{!! asset('images/companylogo.png') !!}" class="companyLogo"/>
         </a>
         <a class="navbar-brand brand-logo-mini" href="dashboard">
-          <img src='' class="companyLogo"/>
+          <img src="{!! asset('images/companylogo.png') !!}" class="companyLogo"/>
         </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
       @yield('headerButton')
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown d-none d-xl-inline-block">
-              <span class="profile-text nav-link">
-                  
+              <span class="profile-text nav-link" style="display: -webkit-inline-box !important">
+                  @if ( App\User::where('notification', '0')->count() == '0' && App\Bookmassage::where('notification', '0')->count() == '0' )
+                    <div class="dropdown">
+                        <i class="fa fa-bell dropbtn" onclick="myFunction()"><span><small style="position:absolute">0</small></span></i></span>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="#">No Notification</a>
+                        </div>
+                    </div>
+                  @else
+                    <div class="dropdown">
+                      <i class="fa fa-bell dropbtn" onclick="myFunction()"><span><small style="position:absolute">{{ App\User::where('notification', '0')->count() + App\Bookmassage::where('notification', '0')->count() }}</small></span></i></span>
+                        <div id="myDropdown" class="dropdown-content">
+                         
+                        </div>
+                    </div>
+                  @endif
 
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
             

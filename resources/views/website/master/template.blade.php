@@ -22,29 +22,15 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <script src="{!! asset('website/vendor/jquery/jquery.min.js') !!}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
-
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-    <style>
-        img.companyLogo {
-            width: 230px !important;
-            height: 120px !important;
-        }
-        h3.mvs,.loc{
-            color:#081224 !important;
-        }
-        p{
-            color:#081224 !important;
-            padding: 5px !important;
-        }
-    </style>
+    @yield('links')
 </head>
 <body>
 <div class="super_container">
     @include('website.partial.header')
     @yield('content')
-    @yield('footer')
+    @include('website.partial.footer')
 </div>
 </body>
     <script src="{!! asset('website/styles/bootstrap-4.1.2/popper.js') !!}"></script>
@@ -61,24 +47,30 @@
     <script src="{!! asset('website/js/function.js') !!}"></script>
     <script src="{!! asset('website/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    
     <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        function makeid(length) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < length; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
         }
-    });
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-        $('.paypal').click(function(){
-               $('#amount').val($(this).attr('value'));
-               var fullDate = new Date();
-               var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) :(fullDate.getMonth()+1);
-               var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
-                  setTimeout(() => {
-                        $( "#paypalbtn" ).trigger( "click" );
-                  }, 500);
-            })
-    });
+
+        $(document).ready( function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $('#table_id').DataTable();
+           
+
+            
+        });
     </script>
-    @yield('scripts');
+    @yield('script')
+</html>

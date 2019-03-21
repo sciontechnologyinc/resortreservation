@@ -18,11 +18,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <style>
         .navbar.default-layout .navbar-brand-wrapper .navbar-brand img {
-            height: 60px !important;
-            width: 140px !important;
-        }
-        .nav-link{
-            display: -webkit-inline-box !important;
+            height: 55px !important;
+            width: 100px !important;
         }
         
     </style>
@@ -63,8 +60,8 @@
             data:{},
             success: function(response){
                 var websites = response.companyinformation[0];
-                $('.companyLogo').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
-                $('.logoImage').attr('src',"{!! asset('storage/uploads/"+websites.photo+"')!!}");
+                $('.companyLogo').attr('src',"{!! asset('storage/app/public/uploads/"+websites.photo+"')!!}");
+                $('.logoImage').attr('src',"{!! asset('storage/app/public/uploads/"+websites.photo+"')!!}");
             }
         });
         $('.fa-bell').click(function(){

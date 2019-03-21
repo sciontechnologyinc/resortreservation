@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
+
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -15,9 +16,11 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
-use Bookmassage;
+use App\Bookmassage;
+use App\Packages;
 use Redirect;
 use Session;
+use DB;
 use URL;
 
 class PaymentController extends Controller
@@ -42,25 +45,54 @@ class PaymentController extends Controller
         $this->_api_context->setConfig($paypal_conf['settings']);
  
     }
+
     public function payWithpaypal(Request $request)
     {
- 
+        $data = $request->validate([
+            'code' => 'required',
+            'user_id' => 'required',
+            'contactno' => 'required',
+            'from' => 'required',
+            'to' => 'required',
+            'amount' => 'required',
+            'package' => 'required'
+            
+        ]);
+        $amountpackage = Packages::select('price')->where('packagecode', '=', $request->package)->get();
+        $plucked = $amountpackage[0]->price;
+
+        $from = date_format(date_create($request->from),"Y-m-d");
+        $to = date_format(date_create($request->to),"Y-m-d");
+        $time = date_format(date_create($request->time),"H:i:s");
+        $bkms = new Bookmassage();
+        $bkms->code = $request->code;
+        $bkms->user_id = $request->user_id;;
+        $bkms->contactno =  $request->contactno;
+        $bkms->start_date =  $from.' '.$time;
+        $bkms->end_date =  $to.' '.$time;
+        $bkms->amount =  $request->amount;
+        $bkms->daytime = $request->day;
+        $bkms->nighttime = $request->night;
+        $bkms->package = $request->package;
+        $bkms->status = "Pending";
+        $bkms->save();
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
  
         $item_1 = new Item();
  
         $item_1->setName('Item 1') /** item name **/
-            ->setCurrency('USD')
+            ->setCurrency('PHP')
             ->setQuantity(1)
-            ->setPrice($request->get('amount')); /** unit price **/
+            ->setPrice($request->amount); /** unit price **/
  
         $item_list = new ItemList();
         $item_list->setItems(array($item_1));
  
         $amount = new Amount();
-        $amount->setCurrency('USD')
-            ->setTotal($request->get('amount'));
+        $amount->setCurrency('PHP')
+            ->setTotal($request->amount);
  
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -86,12 +118,13 @@ class PaymentController extends Controller
             if (\Config::get('app.debug')) {
  
                 \Session::put('error', 'Connection timeout');
-                return Redirect::route('paywithpaypal');
+
+                return Redirect::to('/');
  
             } else {
  
                 \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::route('paywithpaypal');
+                return Redirect::to('/');
  
             }
  
@@ -119,7 +152,7 @@ class PaymentController extends Controller
         }
  
         \Session::put('error', 'Unknown error occurred');
-        return Redirect::route('paywithpaypal');
+        return Redirect::to('/');
  
     }
 
@@ -133,8 +166,9 @@ class PaymentController extends Controller
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
             \Session::put('error', 'Payment failed');
-            return Redirect::to('paypalform');
-
+            $paypalamount = Bookmassage::latest()->limit(1)->delete();  
+            
+            return Redirect::to('/');
         }
 
         $payment = Payment::get($payment_id, $this->_api_context);
@@ -147,12 +181,17 @@ class PaymentController extends Controller
         if ($result->getState() == 'approved') {
 
             \Session::put('success', 'Payment success');
-            return Redirect::to('paypalform');
+            DB::table('Bookmassages')
+            ->latest()
+            ->limit(1)
+            ->update(['status' => "Paid"]);
+            $resort = Bookmassage::orderBy('id','desc')->latest()->limit(1)->get();
+            return Redirect::to('/');
 
         }
 
         \Session::put('error', 'Payment failed');
-        return Redirect::to('paypalform');
-
+        $resort = Bookmassage::orderBy('id','desc')->latest()->limit(1)->get();
+            return Redirect::to('/');
     }
 }

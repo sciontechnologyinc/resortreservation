@@ -16,14 +16,15 @@ class CreateBookmassagesTable extends Migration
         Schema::create('bookmassages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('user_id')->nullable();
-            $table->string('fullname');
+            $table->string('code');
             $table->string('contactno');
-            $table->string('noofreservation');
             $table->string('amount')->default('0');
             $table->boolean('notification')->default('0');
             $table->string('datepay')->default('');
-            $table->datetime('datetime');
-            $table->string('noofhours');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
+            $table->string('daytime')->nullable();
+            $table->string('nighttime')->nullable();
             $table->string('package');
             $table->string('status');
             $table->timestamps();

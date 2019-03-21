@@ -9,16 +9,17 @@ class Bookmassage extends Model
     protected $table="bookmassages";
 	protected $fillable = [
         'user_id',
-        'fullname',
+        'code',
         'contactno',
-        'noofreservation',
-        'status',
         'amount',
         'notification',
         'datepay',
-        'datetime',
-        'noofhours',
-        'package'
+        'from',
+        'start_date',
+        'end_date',
+        'night',
+        'package',
+        'status'
 	];
 
 }

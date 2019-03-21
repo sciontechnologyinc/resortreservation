@@ -26,6 +26,14 @@ class CreateCompanyinformationTable extends Migration
             $table->string('photo')->nullable();
             $table->timestamps();
         });
+        DB::table('companyinformation')->insert(
+            array(
+                array('user_id' => '0','companyname' => 'Administrator', 'mission' => 'sample mission','vision'=>'sample vision','contactno'=>'09056171321', 
+                'address'=>'sample address','email'=>'sample email','footerinformation'=>'sample footer information')
+               
+            )
+        );
+        
     }
 
     /**

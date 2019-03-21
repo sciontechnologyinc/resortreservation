@@ -18,8 +18,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = User::orderBy('id')->get();
-        return view('accounts.account', ['accounts' => $accounts]);
+        $accounts = User::where('admin','!=','2')->orderBy('id')->get();
+        return view('accounts.account', compact('accounts'));
     }
 
     /**
@@ -107,10 +107,9 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        $accounts = User::find($id);
-	    $accounts->destroy($id);
-
-
-	    return redirect()->back()->with('success','Deleted successfuly');
+        $account = User::find($id);
+	    $account->destroy($id);
+        $accounts = User::where('admin','!=','2')->orderBy('id')->get();
+        return view('accounts.account', compact('accounts'));
     }
 }

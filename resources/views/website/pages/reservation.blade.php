@@ -20,50 +20,25 @@
 <div class="container reservation-page">
     <div class="reservation-title mx-0 px-0">YOUR RESERVATIONS</div>
     @if ($message = Session::get('success'))
-    <div class="w3-panel w3-green w3-display-container">
-        <span onclick="this.parentElement.style.display='none'"
-                class="w3-button w3-green w3-large w3-display-topright">&times;</span>
-        <p>{!! $message !!}</p>
+    <div class="container">
+      <div class="alert alert-success">
+        <strong>Success!</strong> {!!$message!!}.
+      </div>
     </div>
     <?php Session::forget('success');?>
     @endif
  
     @if ($message = Session::get('error'))
-    <div class="w3-panel w3-red w3-display-container">
-        <span onclick="this.parentElement.style.display='none'"
-                class="w3-button w3-red w3-large w3-display-topright">&times;</span>
-        <p>{!! $message !!}</p>
+    <div class="container">
+      <div class="alert alert-danger">
+        <strong>Success!</strong> {!!$message!!}.
+      </div>
     </div>
     <?php Session::forget('error');?>
     @endif
     <div class="table-responsive">
 
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Package Code</th>
-              <th>Package Description</th>
-              <th>Price</th>
-              <th>No. of Reservation</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Paypal</th>
-            </tr>
-          </thead>
-          <tbody>
-          @foreach($packages as $package)
-            <tr>
-              <td>{{ $package->packagecode }}</td>
-              <td>{{ $package->packagedescription }}</td>
-              <td>{{ $package->price }}</td>
-              <td>{{ $package->noofreservation }}</td>
-              <td>{{ $package->datetime }}</td>
-              <td>{{ $package->status }}</td>
-            <td><img src="{!! asset('images/paypal.svg') !!}" class="paypal" height="1%" stlye="margin-bottom:30px" id="{{ $package->id }}" value="{{ $package->price }}"> </img></td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
+     
           <button type="submit" name="your_name" value="your_value" class="btn-link">Go</button>
           <div id="paypalmodal" class="modal fade" role="dialog">
             <div class="modal-dialog">

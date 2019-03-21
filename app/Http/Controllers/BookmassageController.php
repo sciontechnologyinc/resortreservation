@@ -26,20 +26,13 @@ class BookmassageController extends Controller
         $event_list = [];
         foreach($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->fullname,
+                $event->code,
                 false,
-                new \DateTime($event->datetime),
-                new \DateTime($event->datetime.'+'.$event->noofhours.'hour'),
+                new \DateTime($event->start_date),
+                new \DateTime($event->start_date.'+1 hour'),
                 $event->id,
                 [
-                    'bid'=>$event->id,
-                    'package'=> $event->packagecode,
-                    'status'=> $event->status,
-                    'noofhours'=> $event->noofhours,
-                    'noofreservation'=> $event->noofreservation,
-                    'contactno' => $event->contactno,
-                    'description' => $event->packagedescription,
-                    'price' => $event->price,
+                  
                 ]
             );
         }
@@ -51,7 +44,6 @@ class BookmassageController extends Controller
             "selectable" => true,
             "height"=> "auto",
             // "minTime" =>  "10:00:00",
-            "hiddenDays"=> [ 6, 0 ],
             // "maxTime" => "18:00:00",
             "header"=> [
                 "right"=> 'prevYear,prev,next,nextYear',
@@ -78,34 +70,31 @@ class BookmassageController extends Controller
              "eventClick" => "function(event) {
                 $('#editreserve').modal('show');
                 console.log(event);
-                $('[name=id]').val(event.bid);
-                $('[name=fullname]').val(event.title);
-                $('[name=contactno]').val(event.contactno);
-                $('[name=resvdate]').val(event.start.format('YYYY-MM-DD'));
-                $('[name=resvtime]').val(event.start.format('HH:mm:ss'));
-                $('[name=package]').val(event.package);
-                $('[name=noofhours]').val(event.noofhours);
-                $('[name=noofreservation]').val(event.noofreservation);
-                $('[name=status]').val(event.status);
+                // $('[name=id]').val(event.bid);
+                // $('[name=fullname]').val(event.title);
+                // $('[name=contactno]').val(event.contactno);
+                // $('[name=resvdate]').val(event.start.format('YYYY-MM-DD'));
+                // $('[name=resvtime]').val(event.start.format('HH:mm:ss'));
+                // $('[name=package]').val(event.package);
+                // $('[name=noofhours]').val(event.noofhours);
+                // $('[name=noofreservation]').val(event.noofreservation);
+                // $('[name=status]').val(event.status);
             }",
             "dayClick" => "function(date, jsEvent, view) {
                 $('#reserve').modal('show'); 
-                $('[name=resvdate]').val(date.format('YYYY-MM-DD'));
-                $('[name=resvtime]').val(date.format('HH:mm:ss'));
+                // $('[name=resvdate]').val(date.format('YYYY-MM-DD'));
+                // $('[name=resvtime]').val(date.format('HH:mm:ss'));
             }"
         ]);
         $packages = Packages::orderBy('id')->get();
-        return view('bookmassages.index', ['bookmassages' => $bookmassages, 'packages' => $packages]);
+        $paypalamount = Bookmassage::orderBy('id','desc')->get();   
+
+        return view('bookmassages.index', ['bookmassages' => $bookmassages, 'packages' => $packages,'paypalamount' => $paypalamount]);
     }
 
     public function reservation()
     {
-        $packages = Bookmassage::where('fullname', '=', Auth::user()->name)
-            ->join('packages', 'packages.packagecode', '=', 'bookmassages.package')
-            ->get();
-
-      return view('website.pages.reservation', ['packages' => $packages]);
-
+      return view('website.pages.reservation');
     }
 
     public function allreservation()
@@ -135,23 +124,35 @@ class BookmassageController extends Controller
     {
 
         $data = $request->validate([
-            'noofreservation' => 'required',
-            'noofhours' => 'required',
+            'code' => 'required',
+            'user_id' => 'required',
+            'contactno' => 'required',
+            'from' => 'required',
+            'to' => 'required',
+            'amount' => 'required',
             'package' => 'required'
             
         ]);
-        $date = date_format(date_create($request->resvdate),"Y-m-d");
-        $time = date_format(date_create($request->resvtime),"H:i:s");
+        $amountpackage = Packages::select('price')->where('packagecode', '=', $request->package)->get();
+        $plucked = $amountpackage[0]->price;
+
+        $from = date_format(date_create($request->from),"Y-m-d");
+        $to = date_format(date_create($request->to),"Y-m-d");
+        $time = date_format(date_create($request->time),"H:i:s");
         $bkms = new Bookmassage();
-        $bkms->fullname = $request->fullname;
+        $bkms->code = $request->code;
         $bkms->user_id = $request->user_id;;
         $bkms->contactno =  $request->contactno;
-        $bkms->noofreservation =  $request->noofreservation;
-        $bkms->noofhours =  $request->noofhours;
-        $bkms->package =  $request->package;
-        $bkms->datetime = $date.' '.$time;
+        $bkms->start_date =  $from.' '.$time;
+        $bkms->end_date =  $to.' '.$time;
+        $bkms->amount =  $request->amount;
+        $bkms->daytime = $request->day;
+        $bkms->nighttime = $request->night;
+        $bkms->package = $request->package;
         $bkms->status = "Pending";
         $bkms->save();
+
+        
         return redirect()->back()->with('success','Added successfuly');
     }
 
@@ -199,7 +200,7 @@ class BookmassageController extends Controller
         Nexmo::message()->send([
             'to'   => '639215128314',
             'from' => 'SJDMB',
-            'text' => 'Reservation Complete !: '.$date.' '.$time.''
+            'text' => 'Reservation '.$request->status.' !: '.$date.' '.$time.''
         ]);
         $bkms->save();
         return redirect('/bookmassages')->with('success','Updated successfuly');
@@ -214,5 +215,11 @@ class BookmassageController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function amount($id)
+    {
+        $amount = Packages::where("packagecode", $id)->get();
+        return response()->json(['success' => true, 'amount' => $amount]);
     }
 }

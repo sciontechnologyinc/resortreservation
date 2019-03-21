@@ -57,7 +57,7 @@
                     <div class="footer_logo_container">
                         <div class="footer_logo">
                             <a href="#" class="text-center">
-                            <div class="logo_title"><img src="{{asset('storage/uploads/').'/'.$companyinfo->photo}}" class="companyLogo"></div>
+                            <div class="logo_title"><img src="{{asset('storage/app/public/uploads/').'/'.$companyinfo->photo}}" class="companyLogo"></div>
                             </a>
                         </div>
                     </div>

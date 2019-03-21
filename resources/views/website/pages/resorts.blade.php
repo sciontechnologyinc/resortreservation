@@ -181,7 +181,7 @@ a.nav-link {
                 <div class="info-card">
                     <div class="thumbnail">
                         <div class="front">
-                        <img src="{{asset('storage/uploads/'.$companyinformation->photo)}}" alt="Resort Logo" style="width:100%">
+                        <img src="{{asset('storage/app/public/uploads/'.$companyinformation->photo)}}" alt="Resort Logo" style="width:40%">
                         <div class="caption">
                             <center><h4 class="rc-name">{{$companyinformation->companyname}}</h4></center>
                             <center><p class="rc-address">{{$companyinformation->address}}</p></center>

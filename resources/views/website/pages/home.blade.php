@@ -25,19 +25,27 @@
     
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    @foreach ($galleries as $galery)
+                    @forelse ($galleries as $galery)
                         <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="{{ $loop->first ? ' active' : '' }}"></li>
-                    @endforeach
+                    @empty
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    @endforelse
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    @foreach ($galleries as $galery)
+                    @forelse ($galleries as $galery)
                         <!-- Slide One - Set the background image for this slide in the line below -->
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{!! asset('storage/uploads/'.$galery->photo)!!}')">
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{!! asset('storage/app/public/uploads/'.$galery->photo)!!}')">
                         <div class="carousel-caption d-none d-md-block">
                             <h3></h3>
                         </div>
                     </div>
-                  @endforeach
+                    @empty
+                    <div class="carousel-item active" style="background-image: url('/images/defaultslide.jpg')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3></h3>
+                        </div>
+                    </div>
+                  @endforelse
                  
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -121,7 +129,7 @@
                     <div class="footer_logo_container">
                         <div class="footer_logo">
                             <a href="#" class="text-center">
-                            <div class="logo_title"><img src="{{asset('storage/uploads/').'/'.$companyinfo->photo}}" class="companyLogo"></div>
+                            <div class="logo_title"><img src="{{asset('storage/app/public/uploads/').'/'.$companyinfo->photo}}" class="companyLogo"></div>
                             </a>
                         </div>
                     </div>

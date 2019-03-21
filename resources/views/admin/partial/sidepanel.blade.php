@@ -23,9 +23,9 @@
                 {{-- <li class="nav-item">
                   <a class="nav-link" href="cabins">Cabins</a>
                 </li> --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a class="nav-link" href="staffs">Staffs</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('galleries/show') }}">Galleries</a>
                   </li>
@@ -35,9 +35,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="packages">Packages</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a class="nav-link" href="promotions">Promo</a>
-                </li>
+                </li> --}}
               </ul>
             </div>
           </li>
