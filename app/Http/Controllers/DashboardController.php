@@ -36,13 +36,11 @@ class DashboardController extends Controller
         }
         else
         {
-            $amount =Bookmassage::select('amount')->where('status','Paid')->where('id',Auth::user()->id)->sum('amount');
-            $reports = Bookmassage::orderBy('id')->where('id',Auth::user()->id)->get();
+            $amount =Bookmassage::select('amount')->where('status','Paid')->where('user_id',Auth::user()->id)->sum('amount');
+            $reports = Bookmassage::orderBy('id')->where('user_id',Auth::user()->id)->get();
             $users = User::where('id',Auth::user()->id)->count();
             $staff = Staffs::where('id',Auth::user()->id)->count();
             $report = Bookmassage::where('id',Auth::user()->id)->count();
-
-            
         }
         return view('dashboard.index', compact('reports','users','staff','report','amount'));
 

@@ -37,7 +37,7 @@ class GalleryController extends Controller
     {
         $gallery = $request->all();
         $data = $request->validate([
-           'photo' => 'required'
+           'photo' => ['required', 'unique:galleries']
        ]);
        
        if($request->hasFile('photo')){

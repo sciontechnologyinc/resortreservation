@@ -18,7 +18,10 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = User::where('admin','!=','2')->orderBy('id')->get();
+        $accounts = User::join('companyinformation', 'users.id', '=', 'companyinformation.user_id')
+        ->select('*','users.id as id')
+        ->where('admin','!=','2')->get();
+
         return view('accounts.account', compact('accounts'));
     }
 
@@ -41,6 +44,7 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -108,8 +112,17 @@ class AccountController extends Controller
     public function destroy($id)
     {
         $account = User::find($id);
-	    $account->destroy($id);
+        $account->delete($id);
+        
+        $companyinfo = Companyinformation::where('user_id',$id)->delete();
+        
         $accounts = User::where('admin','!=','2')->orderBy('id')->get();
         return view('accounts.account', compact('accounts'));
     }
+
+    public function activate($id)
+    {
+        $activate = User::where('id', $id)->update(request()->all());
+    }
+    
 }

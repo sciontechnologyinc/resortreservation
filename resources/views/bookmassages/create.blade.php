@@ -21,7 +21,7 @@
 @section('content')
 
 <div class="container reservation-page">
-    @if($message = Session::get('success'))
+    {{-- @if($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
@@ -37,7 +37,7 @@
               @endforeach
             </ul>
         </div>
-     @endif
+     @endif --}}
     <div class="reservation-title mx-0 px-0">RESERVATIONS</div>
     {!! $bookmassages->calendar() !!}
 </div>
@@ -69,9 +69,6 @@
                                 @endforeach
                                  </div>
                                  <div class="form-group">
-                                    @foreach ($paypalamount as $item)
-                                        {{$item->amount}}
-                                    @endforeach
                                  {!!Form::label('contactno', 'Contact No', array('class' => 'form-control-label'))!!}
                                  {!!Form::number('contactno','' , ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
                                  </div>
@@ -97,7 +94,7 @@
                                  <div class="form-group">
                                         {!!Form::label('datetime', 'To', array('class' => 'form-control-label'))!!}
                                         {!!Form::date('to',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
-                                        {!!Form::time('time',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                        {!!Form::hidden('time',null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'value' => '12:00:00'])!!}
                                 </div>
                                 <div class="form-group">
                                         {!!Form::label('datetime', 'Day Time', array('class' => 'form-control-label'))!!}
@@ -151,7 +148,25 @@
       </div>
    @section('script')
        <script>
-            
+              $('[name=package]').prop('disabled',true);
+
+            $('[name=contactno]').change(function(){
+              $('[name=package]').prop('disabled',false);
+                var to = $('[name=to]').val()+' '+'10:18:30';
+                var from = $('[name=from]').val()+' '+'10:18:30';
+                var user_id = $('[name=user_id]').val();
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url:'/bookmassages/noofreservation/'+to+'/'+from+'/'+user_id,
+                    method:'POST',
+                    data:{},
+                    success: function(data){
+                        $('[name=package]').empty();
+                        
+                    }
+                });
+            })
+
            $('[name=from],[name=to],[name=day],[name=night]').prop('disabled',true);
            $('[name=code]').val(makeid(8));
            $('[name=package]').change(function(){

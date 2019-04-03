@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 use App\Bookmassage;
 use App\Packages;
+use App\Schedule;
 use App\Companyinformation;
 use Calendar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 
 class PackageController extends Controller
@@ -19,7 +21,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Packages::orderBy('id')->get();
+        $packages = Packages::where('user_id',Auth::user()->id)->orderBy('id')->get();
         return view('packages.packages', ['packages' => $packages]);
     }
 
@@ -33,7 +35,25 @@ class PackageController extends Controller
 
     public function packagesdropdown($id)
     {
-        $events = Bookmassage::orWhere('user_id',$id)->get();
+        $events = Bookmassage::orWhere('user_id',$id)->where('status','Paid')->get();
+        $schedules = Schedule::where('users_id',$id)->get();
+        $operation = [];
+        if($schedules[0]->monday != 'on'){
+            array_push($operation,1);
+        }if($schedules[0]->tuesday != 'on'){
+            array_push($operation,2);
+        }if($schedules[0]->wednesday != 'on'){
+            array_push($operation,3);
+        }if($schedules[0]->thursday != 'on'){
+            array_push($operation,4);
+        }if($schedules[0]->friday != 'on'){
+            array_push($operation,5);
+        }if($schedules[0]->saturday != 'on'){
+            array_push($operation,6);
+        }if($schedules[0]->sunday != 'on'){
+            array_push($operation,0);
+        }
+        
         $event_list = [];
         foreach($events as $key => $event) {
             $date = date_format(date_create($event->start_date),"Y/m/d H:i:s");
@@ -53,6 +73,7 @@ class PackageController extends Controller
             "height"=> "auto",
             // "minTime" =>  "10:00:00",
             // "maxTime" => "18:00:00",
+            "hiddenDays" => $operation,
             "header"=> [
                 "right"=> 'prevYear,prev,next,nextYear',
                 "left"=> 'month,agendaWeek,today',
@@ -94,11 +115,10 @@ class PackageController extends Controller
     {
         $package = $request->all();
         $data = $request->validate([
-           'packagecode' => 'required',
-           'packagedescription' => 'required',
+           'packagecode' => ['required', 'max:255', 'unique:packages'],
+           'packagedescription' => ['required', 'unique:packages'],
            'price' => 'required',
-           'photo' => 'image|nullable|max:1999'
-           
+           'photo' => ['required', 'unique:packages','image','nullable','max:1999'],
        ]);
        
        if($request->hasFile('photo')){
@@ -180,5 +200,11 @@ class PackageController extends Controller
 
 
 	    return redirect()->back()->with('success','Deleted successfuly');
+    }
+
+    public function description($id)
+    {
+        $codepackages = Packages::where('packagecode',$id)->get();
+        return response()->json(['codepackages' => $codepackages]);
     }
 }

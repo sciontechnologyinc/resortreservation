@@ -35,79 +35,49 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <div class="form-group">
-                                {!!Form::label('fullname', 'Full Name', array('class' => 'form-control-label'))!!}
-                                {!!Form::text('fullname',  null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'required' => '' ])!!}
-                                </div>
-                                <div class="form-group">
-                                {!!Form::label('contactno', 'Contact No', array('class' => 'form-control-label'))!!}
-                                {!!Form::text('contactno', null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'required' => '' ])!!}
-                                </div>
-                                <div class="form-group">
-                                {!!Form::label('datetime', 'Date/Time', array('class' => 'form-control-label'))!!}
-                                {!!Form::date('resvdate',null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly' => '' ])!!}
-                                <br />
-                                {!!Form::time('resvtime',null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly' => '' ])!!}
-                                </div>
-                                <div class="form-group">
-                                   {!!Form::label('noofhours', 'No of Hours', array('class' => 'form-control-label'))!!}
-                                   <div class="iconic-input">
-                                           <div class="input-group margin-bottom-sm">
-                                           <span class="input-group-addon">
-                                           </span>
-                                           <select name="noofhours" class="form-control">
-                                                   <option value="" disabled {{ old('department') ? '' : 'selected' }}>No. of Hours</option>
-                                                   @for($i = 0; $i <= 10; $i++)
-                                                       <option value="{{$i}}">{{$i}}</option>
-                                                   @endfor
-                                           </select>
-                                           </div>
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                    {!!Form::label('noofreservation', 'No of Reservation', array('class' => 'form-control-label'))!!}
-                                    <div class="iconic-input">
-                                            <div class="input-group margin-bottom-sm">
-                                            <span class="input-group-addon">
-                                            </span>
-                                            <select name="noofreservation" class="form-control">
-                                                    <option value="" disabled {{ old('department') ? '' : 'selected' }}>No. of Reservation</option>
-                                                    @for($i = 0; $i <= 10; $i++)
-                                                        <option value="{{$i}}">{{$i}}</option>
-                                                    @endfor
-                                            </select>
+                                            <div class="form-group">
+                                            {!!Form::label('Reservation Code', 'Reservation Code', array('class' => 'form-control-label'))!!}
+                                            {!!Form::text('code', '' , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly' => '' ])!!}
                                             </div>
-                                    </div>
-                                </div>
-                               <div class="form-group">
-                                  {!!Form::label('package', 'Package', array('class' => 'form-control-label'))!!}
-                                  <div class="iconic-input">
-                                       <div class="input-group margin-bottom-sm">
-                                       <span class="input-group-addon">
-                                       </span>
-                                       <select name="package" class="form-control">
-                                               <option value="" disabled {{ old('department') ? '' : 'selected' }}>Choose a Package</option>
-                                               @foreach($packages as $package)
-                                                   <option value="{{$package->packagecode}}" {{ old('package') ? 'selected' : '' }}>{{$package->packagedescription}}</option>
-                                               @endforeach
-                                      </select>
-                                       </div>
-                                 </div>
-                               </div>
-                               <div class="form-group">
-                                  {!!Form::label('status', 'Status', array('class' => 'form-control-label'))!!}
-                                  <div class="iconic-input">
-                                          <div class="input-group margin-bottom-sm">
-                                          <span class="input-group-addon">
-                                          </span>
-                                          <select name="status" class="form-control">
-                                                <option value="Pending">Pending</option>
-                                                <option value="Cancelled">Cancelled</option>
-                                                <option value="Paid">Paid</option>
-                                          </select>
-                                          </div>
-                                  </div>
-                               </div>
+                                            <div class="form-group">
+                                            {!!Form::label('contactno', 'Contact No', array('class' => 'form-control-label'))!!}
+                                            {!!Form::number('contactno','' , ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                            </div>
+                                            <div class="form-group">
+                                                   {!!Form::label('Service', 'Service', array('class' => 'form-control-label'))!!}
+                                                   <div class="iconic-input">
+                                                        <div class="input-group margin-bottom-sm">
+                                                        <span class="input-group-addon">
+                                                        </span>
+                                                        <select name="package" class="form-control">
+                                                                <option value="" disabled {{ old('department') ? '' : 'selected' }}>Choose a Service</option>
+                                                                @foreach($packages as $package)
+                                                                    <option value="{{$package->packagecode}}" {{ old('package') ? 'selected' : '' }}>{{$package->packagedescription}}</option>
+                                                                @endforeach
+                                                       </select>
+                                                        </div>
+                                                  </div>
+                                           </div>
+                                            <div class="form-group">
+                                            {!!Form::label('datetime', 'From', array('class' => 'form-control-label'))!!}
+                                            {!!Form::date('from',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                            </div>
+                                            <div class="form-group">
+                                                   {!!Form::label('datetime', 'To', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::date('to',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                                   {{-- {!!Form::time('time',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!} --}}
+                                           </div>
+                                           <div class="form-group">
+                                                   {!!Form::label('datetime', 'Day Time', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::checkbox('day',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                                   {!!Form::label('datetime', 'Night Time', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::checkbox('night',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                           </div>
+                                          
+                                            <div class="form-group">
+                                                   {!!Form::label('amount', 'Total Amount', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::number('amount','' , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly'=>''])!!}
+                                           </div>
                             </div>
                         </div>
                     </div>
@@ -140,81 +110,52 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <div class="form-group">
-                                {!!Form::label('fullname', 'Full Name', array('class' => 'form-control-label'))!!}
-                                {!!Form::hidden('id', 'id', array('class' => 'form-control-label'))!!}
-                                {!!Form::text('fullname',  null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'required' => '' ])!!}
-                                </div>
-                                <div class="form-group">
-                                {!!Form::label('contactno', 'Contact No', array('class' => 'form-control-label'))!!}
-                                {!!Form::text('contactno', null, ['placeholder' => '', 'class' => 'form-control col-lg-12', 'required' => '' ])!!}
-                                </div>
-                                <div class="form-group">
-                                {!!Form::label('datetime', 'Date/Time', array('class' => 'form-control-label'))!!}
-                                {!!Form::date('resvdate',null, ['placeholder' => '', 'class' => 'form-control col-lg-12' ])!!}
-                                <br />
-                                {!!Form::time('resvtime',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
-                                </div>
-                                <div class="form-group">
-                                        {!!Form::label('noofhours', 'No of Hour/s', array('class' => 'form-control-label'))!!}
-                                        <div class="iconic-input">
-                                                <div class="input-group margin-bottom-sm">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <select name="noofhours" class="form-control">
-                                                        <option value="" disabled {{ old('department') ? '' : 'selected' }}>No. of Hour/s</option>
-                                                        @for($i = 0; $i <= 10; $i++)
-                                                            <option value="{{$i}}">{{$i}}</option>
-                                                        @endfor
-                                                </select>
-                                                </div>
-                                        </div>
-                                    </div>
-                                <div class="form-group">
-                                   {!!Form::label('noofreservation', 'No of Reservation', array('class' => 'form-control-label'))!!}
-                                   <div class="iconic-input">
-                                           <div class="input-group margin-bottom-sm">
-                                           <span class="input-group-addon">
-                                           </span>
-                                           <select name="noofreservation" class="form-control">
-                                                   <option value="" disabled {{ old('department') ? '' : 'selected' }}>No. of Reservation</option>
-                                                   @for($i = 0; $i <= 10; $i++)
-                                                       <option value="{{$i}}">{{$i}}</option>
-                                                   @endfor
-                                           </select>
+                                    <div class="form-group">
+                                            {!!Form::label('Reservation Code', 'Reservation Code', array('class' => 'form-control-label'))!!}
+                                            {!!Form::text('code', '' , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly' => '' ])!!}
+                                            </div>
+                                            <div class="form-group">
+                                            {!!Form::label('contactno', 'Contact No', array('class' => 'form-control-label'))!!}
+                                            {!!Form::number('contactno','' , ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                            </div>
+                                            <div class="form-group">
+                                                   {!!Form::label('Service', 'Service', array('class' => 'form-control-label'))!!}
+                                                   <div class="iconic-input">
+                                                        <div class="input-group margin-bottom-sm">
+                                                        <span class="input-group-addon">
+                                                        </span>
+                                                        <select name="package" class="form-control">
+                                                                <option value="" disabled {{ old('department') ? '' : 'selected' }}>Choose a Service</option>
+                                                                @foreach($packages as $package)
+                                                                    <option value="{{$package->packagecode}}" {{ old('package') ? 'selected' : '' }}>{{$package->packagedescription}}</option>
+                                                                @endforeach
+                                                       </select>
+                                                        </div>
+                                                  </div>
                                            </div>
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                  {!!Form::label('package', 'Package', array('class' => 'form-control-label'))!!}
-                                  <div class="iconic-input">
-                                       <div class="input-group margin-bottom-sm">
-                                       <span class="input-group-addon">
-                                       </span>
-                                       <select name="package" class="form-control">
-                                               <option value="" disabled {{ old('department') ? '' : 'selected' }}>Choose a Package</option>
-                                               @foreach($packages as $package)
-                                                   <option value="{{$package->packagecode}}" {{ old('package') ? 'selected' : '' }}>{{$package->packagedescription}}</option>
-                                               @endforeach
-                                      </select>
-                                       </div>
-                                 </div>
-                               </div>
-                               <div class="form-group">
-                                  {!!Form::label('status', 'Status', array('class' => 'form-control-label'))!!}
-                                  <div class="iconic-input">
-                                          <div class="input-group margin-bottom-sm">
-                                          <span class="input-group-addon">
-                                          </span>
-                                          <select name="status" class="form-control">
-                                                <option value="Pending">Pending</option>
-                                                <option value="Cancelled">Cancelled</option>
-                                                <option value="Paid">Paid</option>
-                                          </select>
-                                          </div>
-                                  </div>
-                               </div>
-                            </div>
+                                            <div class="form-group">
+                                            {!!Form::label('datetime', 'From', array('class' => 'form-control-label'))!!}
+                                            {!!Form::date('from',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                            </div>
+                                            <div class="form-group">
+                                                   {!!Form::label('datetime', 'To', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::date('to',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                                   {{-- {!!Form::time('time',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!} --}}
+                                           </div>
+                                           <div class="form-group">
+                                                   {!!Form::label('datetime', 'Day Time', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::checkbox('day',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                                   {!!Form::label('datetime', 'Night Time', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::checkbox('night',null, ['placeholder' => '', 'class' => 'form-control col-lg-12'])!!}
+                                           </div>
+                                            <div class="form-group">
+                                                   {!!Form::label('amount', 'Total Amount', array('class' => 'form-control-label'))!!}
+                                                   {!!Form::number('amount','' , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly'=>''])!!}
+                                           </div>
+                                           <div class="form-group">
+                                                {!!Form::label('status', 'Status', array('class' => 'form-control-label'))!!}
+                                                {!!Form::text('status','' , ['placeholder' => '', 'class' => 'form-control col-lg-12', 'readonly'=>''])!!}
+                                        </div>
                         </div>
                     </div>
                 </div>

@@ -18,13 +18,8 @@ class CompanyinformationController extends Controller
      */
     public function index()
     {
-        if (Companyinformation::where('user_id', '=', Auth::user()->id)->exists()) {
-            $companyinformations = Companyinformation::where('user_id', Auth::user()->id)->get();
-            return view('companyinformation.companyinformation')->with('companyinformations', $companyinformations);
-        }else{
-            $companyinformations = Companyinformation::where('user_id', '0')->get();
+            $companyinformations = Companyinformation::where('user_id',Auth::user()->id)->get();
             return view('companyinformation.companyinformation')->with('companyinformations', $companyinformations);;
-        }
     }
     /**
      * Show the form for creating a new resource.
@@ -45,16 +40,7 @@ class CompanyinformationController extends Controller
     public function store(Request $request,$id)
     {
         $companyinformation = $request->all();
-        $data = $request->validate([
-           'companyname' => 'required',
-           'mission' => 'required',
-           'vision' => 'required',
-           'contactno' => 'required',
-           'address' => 'required',
-           'email' => 'required',
-           'footerinformation' => 'required',
-           'photo' => 'image|nullable'
-       ]);
+        
        if($request->hasFile('photo')){
             
         $filenameWithExt = $request->file('photo')->getClientOriginalName();
@@ -69,8 +55,18 @@ class CompanyinformationController extends Controller
     }else{
         $fileNameToStore = 'default_logo.png';
     }
-
+    
         if (Companyinformation::where('user_id', '=', $request->input('user_id'))->exists()) {
+            $data = $request->validate([
+                'companyname' => ['required', 'string', 'max:255','regex:/^[\pL\s\-]+$/u'],
+                'mission' => ['required'],
+                'vision' => ['required'],
+                'contactno' => 'required',
+                'address' => ['required'],
+                'email' => ['required','email'],
+                'footerinformation' => ['required'],
+                'photo' => ['image','nullable'],
+            ]);
             $companyinformation = Companyinformation::where('user_id', $id)->firstOrFail();
             $companyinformation->companyname = $request->input('companyname');
             $companyinformation->mission = $request->input('mission');
@@ -83,6 +79,16 @@ class CompanyinformationController extends Controller
             $companyinformation->save();
             return redirect()->back()->with('success','Added successfuly');
          }else{
+            $data = $request->validate([
+                'companyname' => ['required', 'string', 'max:255','regex:/^[\pL\s\-]+$/u','unique:companyinformation'],
+                'mission' => ['required','unique:companyinformation'],
+                'vision' => ['required','unique:companyinformation'],
+                'contactno' => 'required',
+                'address' => ['required','unique:companyinformation'],
+                'email' => ['required','unique:companyinformation'],
+                'footerinformation' => ['required','unique:companyinformation'],
+                'photo' => ['unique:companyinformation','image','nullable'],
+            ]);
             $companyinformation = new Companyinformation;
             $companyinformation->user_id = $request->input('user_id');
             $companyinformation->companyname = $request->input('companyname');

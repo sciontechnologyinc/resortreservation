@@ -29,10 +29,19 @@ class BookmassageController extends Controller
                 $event->code,
                 false,
                 new \DateTime($event->start_date),
-                new \DateTime($event->start_date.'+1 hour'),
+                new \DateTime($event->end_date),
                 $event->id,
                 [
-                  
+                    'bid'=>$event->id,
+                    'code'=>$event->code,
+                    'contactno'=> $event->contactno,
+                    'amount'=> $event->amount,
+                    'start_date'=> $event->start_date,
+                    'end_date' => $event->end_date,
+                    'daytime' => $event->daytime,
+                    'nighttime' => $event->nighttime,
+                    'package' => $event->package,
+                    'status' => $event->status,
                 ]
             );
         }
@@ -45,9 +54,10 @@ class BookmassageController extends Controller
             "height"=> "auto",
             // "minTime" =>  "10:00:00",
             // "maxTime" => "18:00:00",
+            "hiddenDays" => [3],
             "header"=> [
                 "right"=> 'prevYear,prev,next,nextYear',
-                "left"=> 'month,agendaWeek,agendaDay,today',
+                "left"=> 'month,agendaWeek,today',
                 "center"=> 'title'
             ],
             "businessHours" => [
@@ -63,27 +73,27 @@ class BookmassageController extends Controller
                     placement : 'top',
                     html : true,
                     trigger : 'hover',
-                    title : event.package,
-                    content : '<span><b>Description: </b>' + event.description + '</span><br />' + '<span><b>Price: </b>' + event.price + '</span><br />' + '<span><b>Status: </b>' + event.status + '</span>'
+                    content : '<span><b>Code: </b>' + event.code + '</span><br />' + '<span><b>Price: </b>' + event.amount + '</span><br />' + '<span><b>Status: </b>' + event.status + '</span>'
                 });
              }",
              "eventClick" => "function(event) {
                 $('#editreserve').modal('show');
                 console.log(event);
-                // $('[name=id]').val(event.bid);
-                // $('[name=fullname]').val(event.title);
-                // $('[name=contactno]').val(event.contactno);
-                // $('[name=resvdate]').val(event.start.format('YYYY-MM-DD'));
-                // $('[name=resvtime]').val(event.start.format('HH:mm:ss'));
-                // $('[name=package]').val(event.package);
-                // $('[name=noofhours]').val(event.noofhours);
-                // $('[name=noofreservation]').val(event.noofreservation);
-                // $('[name=status]').val(event.status);
+                $('[name=id]').val(event.bid);
+                $('[name=code]').val(event.code);
+                $('[name=contactno]').val(event.contactno);
+                $('[name=from]').val(event.start.format('YYYY-MM-DD'));
+                $('[name=to]').val(event.end.format('YYYY-MM-DD'));
+                $('[name=amount]').val(event.amount);
+                $('[name=day]').val(event.daytime);
+                $('[name=night]').val(event.nighttime);
+                $('[name=package]').val(event.package);
+                $('[name=status]').val(event.status);
             }",
             "dayClick" => "function(date, jsEvent, view) {
                 $('#reserve').modal('show'); 
-                // $('[name=resvdate]').val(date.format('YYYY-MM-DD'));
-                // $('[name=resvtime]').val(date.format('HH:mm:ss'));
+                $('[name=start_date]').val(date.format('YYYY-MM-DD'));
+                $('[name=end_date]').val(date.format('HH:mm:ss'));
             }"
         ]);
         $packages = Packages::orderBy('id')->get();
@@ -138,7 +148,7 @@ class BookmassageController extends Controller
 
         $from = date_format(date_create($request->from),"Y-m-d");
         $to = date_format(date_create($request->to),"Y-m-d");
-        $time = date_format(date_create($request->time),"H:i:s");
+        $time = date_format(date_create('08:00:00'),"H:i:s");
         $bkms = new Bookmassage();
         $bkms->code = $request->code;
         $bkms->user_id = $request->user_id;;
@@ -221,5 +231,17 @@ class BookmassageController extends Controller
     {
         $amount = Packages::where("packagecode", $id)->get();
         return response()->json(['success' => true, 'amount' => $amount]);
+    }
+
+    public function codeReserved($id)
+    {
+        $reserved = Bookmassage::where("code", $id)->get();
+        return response()->json(['success' => true, 'reserved' => $reserved]);
+    }
+
+    public function codePackage($id)
+    {
+        $codePackage = Packages::where("packagecode", $id)->get();
+        return response()->json(['success' => true, 'codePackage' => $codePackage]);
     }
 }

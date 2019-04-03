@@ -30,7 +30,7 @@
 <div class="super_container">
     @include('website.partial.header')
     @yield('content')
-    @include('website.partial.footer')
+    @yield('footer')
 </div>
 </body>
     <script src="{!! asset('website/styles/bootstrap-4.1.2/popper.js') !!}"></script>
@@ -67,9 +67,6 @@
             });
             
             $('#table_id').DataTable();
-           
-
-            
         });
     </script>
     @yield('script')

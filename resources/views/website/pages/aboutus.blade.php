@@ -28,7 +28,156 @@
           <p class="aboutus"> 
 
         </div>     --}}
-    
+        <h3 class="mvs">Schedule</h3>
+
+        <div class="sched col-sm-offset-3" style="margin-left:25%">
+                @forelse ($schedules as $schedule)
+                <div class="form-group row">
+                        @if ($schedule->monday == 'on')
+                        <label class="col-sm-12 col-form-label"><h5>MONDAY :</h5></label>
+                        <div class="col-sm-8" style="display: inline-flex;">
+                                <label class="col-sm-2 col-form-label">Day Time</label>
+                                <label class="col-sm-2 col-form-label">Time-in</label>
+                                <input type="time" class="form-control" name="day_mon_timein" placeholder="" value="{{$schedule->day_mon_timein}}">
+                                <input type="text" class="form-control" name="users_id" value="{{Auth::user()->id}}" style="display:none">
+                                <label class="col-sm-2 col-form-label">Time-out</label>
+                                <input type="time" class="form-control" name="day_mon_timeout" value="{{$schedule->day_mon_timeout}}">
+                          </div>
+                          <div class="col-sm-8" style="display: inline-flex;">
+                                  <label class="col-sm-2 col-form-label">Night Time</label>
+                                  <label class="col-sm-2 col-form-label">Time-in</label>
+                                  <input type="time" class="form-control" name="night_mon_timein" placeholder="" value="{{$schedule->night_mon_timein}}">
+                                  <label class="col-sm-2 col-form-label">Time-out</label>
+                                  <input type="time" class="form-control" name="night_mon_timeout" value="{{$schedule->night_mon_timeout}}">
+                          </div>
+                        @endif
+                            
+                    </div>
+                    <div class="form-group row">
+                        @if ($schedule->tuesday == 'on')
+                        <label class="col-sm-12 col-form-label"><h5>TUESDAY :</h5></label>
+                            <div class="col-sm-8" style="display: inline-flex;">
+                                    <label class="col-sm-2 col-form-label">Day Time</label>
+                                    <label class="col-sm-2 col-form-label">Time-in</label>
+                                    <input type="time" class="form-control" name="day_tues_timein" placeholder="" value="{{$schedule->day_tues_timein}}">
+                                    <label class="col-sm-2 col-form-label">Time-out</label>
+                                    <input type="time" class="form-control" name="day_tues_timeout" value="{{$schedule->day_tues_timeout}}">
+                              </div>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                      <label class="col-sm-2 col-form-label">Night Time</label>
+                                      <label class="col-sm-2 col-form-label">Time-in</label>
+                                      <input type="time" class="form-control" name="night_tues_timein" placeholder="" value="{{$schedule->night_tues_timein}}">
+                                      <label class="col-sm-2 col-form-label">Time-out</label>
+                                      <input type="time" class="form-control" name="night_tues_timeout" value="{{$schedule->night_tues_timeout}}">
+                              </div>
+                        @endif
+
+                    </div>
+                    <div class="form-group row">
+                            @if ($schedule->wednesday == 'on')
+                        <label class="col-sm-12 col-form-label"><h5>WEDNESDAY :</h5></label>
+
+                            <div class="col-sm-8" style="display: inline-flex;">
+                                    <label class="col-sm-2 col-form-label">Day Time</label>
+                                    <label class="col-sm-2 col-form-label">Time-in</label>
+                                    <input type="time" class="form-control" name="day_wed_timein" placeholder="" value="{{$schedule->day_wed_timein}}">
+                                    <label class="col-sm-2 col-form-label">Time-out</label>
+                                    <input type="time" class="form-control" name="day_wed_timeout" value="{{$schedule->day_wed_timeout}}">
+                              </div>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                      <label class="col-sm-2 col-form-label">Night Time</label>
+                                      <label class="col-sm-2 col-form-label">Time-in</label>
+                                      <input type="time" class="form-control" name="night_wed_timein" placeholder="" value="{{$schedule->night_wed_timein}}">
+                                      <label class="col-sm-2 col-form-label">Time-out</label>
+                                      <input type="time" class="form-control" name="night_wed_timeout" value="{{$schedule->night_wed_timeout}}">
+                              </div>
+                            @endif
+
+                    </div>
+                    <div class="form-group row">
+                        @if ($schedule->thursday == 'on')
+                        <label class="col-sm-12 col-form-label"><h5>THURSDAY :</h5></label>
+                            <div class="col-sm-8" style="display: inline-flex;">
+                                    <label class="col-sm-2 col-form-label">Day Time</label>
+                                    <label class="col-sm-2 col-form-label">Time-in</label>
+                                    <input type="time" class="form-control" name="day_thurs_timein" placeholder="" value="{{$schedule->day_thurs_timein}}">
+                                    <label class="col-sm-2 col-form-label">Time-out</label>
+                                    <input type="time" class="form-control" name="day_thurs_timeout" value="{{$schedule->day_thurs_timeout}}">
+                              </div>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                      <label class="col-sm-2 col-form-label">Night Time</label>
+                                      <label class="col-sm-2 col-form-label">Time-in</label>
+                                      <input type="time" class="form-control" name="night_thurs_timein" placeholder="" value="{{$schedule->night_thurs_timein}}">
+                                      <label class="col-sm-2 col-form-label">Time-out</label>
+                                      <input type="time" class="form-control" name="night_thurs_timeout" value="{{$schedule->night_thurs_timeout}}">
+                              </div>
+                        @endif
+                    </div>
+                    <div class="form-group row">
+                        @if ($schedule->friday == 'on')
+                        <label class="col-sm-12 col-form-label"><h5>FRIDAY :</h5></label>
+
+                            <div class="col-sm-8" style="display: inline-flex;">
+                                    <label class="col-sm-2 col-form-label">Day Time</label>
+                                    <label class="col-sm-2 col-form-label">Time-in</label>
+                                    <input type="time" class="form-control" name="day_fri_timein" placeholder="" value="{{$schedule->day_fri_timein}}">
+                                    <label class="col-sm-2 col-form-label">Time-out</label>
+                                    <input type="time" class="form-control" name="day_fri_timeout" value="{{$schedule->day_fri_timeout}}">
+                              </div>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                      <label class="col-sm-2 col-form-label">Night Time</label>
+                                      <label class="col-sm-2 col-form-label">Time-in</label>
+                                      <input type="time" class="form-control" name="night_fri_timein" placeholder="" value="{{$schedule->night_fri_timein}}">
+                                      <label class="col-sm-2 col-form-label">Time-out</label>
+                                      <input type="time" class="form-control" name="night_fri_timeout" value="{{$schedule->night_fri_timeout}}">
+                              </div>
+                        @endif
+                    </div>
+          
+                    <div class="form-group row">
+                        @if ($schedule->saturday == 'on')
+                            <label class="col-sm-12 col-form-label"><h5>SATURDAY :</h5></label>
+                            <div class="col-sm-8" style="display: inline-flex;">
+                                    <label class="col-sm-2 col-form-label">Day Time</label>
+                                    <label class="col-sm-2 col-form-label">Time-in</label>
+                                    <input type="time" class="form-control" name="day_sat_timein" placeholder="" value="{{$schedule->day_sat_timein}}">
+                                    <label class="col-sm-2 col-form-label">Time-out</label>
+                                    <input type="time" class="form-control" name="day_sat_timeout" value="{{$schedule->day_sat_timeout}}">
+                              </div>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                      <label class="col-sm-2 col-form-label">Night Time</label>
+                                      <label class="col-sm-2 col-form-label">Time-in</label>
+                                      <input type="time" class="form-control" name="night_sat_timein" placeholder="" value="{{$schedule->night_sat_timein}}">
+                                      <label class="col-sm-2 col-form-label">Time-out</label>
+                                      <input type="time" class="form-control" name="night_sat_timeout" value="{{$schedule->night_sat_timeout}}">
+                              </div>
+                        @endif
+                    </div>
+                    <div class="form-group row">
+                        @if ($schedule->sunday == 'on')
+                        <label class="col-sm-12 col-form-label"><h5>SUNDAY :</h5></label>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                    <label class="col-sm-2 col-form-label">Day Time</label>
+                                    <label class="col-sm-2 col-form-label">Time-in</label>
+                                    <input type="time" class="form-control" name="day_sun_timein" placeholder="" value="{{$schedule->day_sun_timein}}">
+                                    <label class="col-sm-2 col-form-label">Time-out</label>
+                                    <input type="time" class="form-control" name="day_sun_timeout" value="{{$schedule->day_sun_timeout}}">
+                              </div>
+                              <div class="col-sm-8" style="display: inline-flex;">
+                                      <label class="col-sm-2 col-form-label">Night Time</label>
+                                      <label class="col-sm-2 col-form-label">Time-in</label>
+                                      <input type="time" class="form-control" name="night_sun_timein" placeholder="" value="{{$schedule->night_sun_timein}}">
+                                      <label class="col-sm-2 col-form-label">Time-out</label>
+                                      <input type="time" class="form-control" name="night_sun_timeout" value="{{$schedule->night_sun_timeout}}">
+                              </div>
+                        @endif
+
+                      </div>
+                    @empty
+                        NO SCHEDULE YET
+                    @endforelse
+        </div>   
+
       <div class="aboutmain">
         <h3 class="mvs">Mission</h3>
         <center><p class="mission">{{$companyinfo->mission}}</p></center>
@@ -39,7 +188,6 @@
           <center><p class="vision">{{$companyinfo->vision}}</p></center>
       </div>  
 </div> 
-@endforeach
 
 </header>
 
@@ -66,12 +214,7 @@
                 <!-- Footer Menu -->
                 <div class="col-lg-5 footer_col">
                     <div class="footer_menu">
-                        <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Reservation</a></li>
-                        </ul>
+                        
                         <div class="footer_menu_text">
                             <center><p id="footerText">{{$companyinfo->footerinformation}}</p></center>
                         </div>
@@ -94,4 +237,13 @@
             </div>
         </div>
 </footer>
+@endforeach
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $('[type=time]').prop('disabled',true);
+        })
+    </script>
+@endsection
 @endsection

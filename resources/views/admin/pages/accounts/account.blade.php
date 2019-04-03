@@ -44,6 +44,7 @@
                           {!! Form::open(['id' => 'deleteForm', 'method' => 'DELETE', 'url' => '/accounts/' . $account->id]) !!}
                           {{ Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'rel' => 'tooltip', 'title' => 'Delete'] )  }}
                           {!! Form::close() !!}
+                          
                           </div>
                           </td>
                         </tr>
@@ -56,4 +57,7 @@
             </div>
     </div>
 </div>
+@section('script')
+    
+@endsection
 @endsection

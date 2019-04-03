@@ -31,13 +31,12 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    @foreach ($companyinformations as $companyinformation)
-                        
+                    @forelse ($companyinformations as $companyinformation)
                     <h4 class="card-title">Company Information</h4>
                     <input type="text" name="user_id" value="{{ Auth::user()->id }}" class="form-control" hidden>
                     <div class="form-group">
                     <label for="companyname">Company Name</label>
-                    <input type="text" name="companyname" class="form-control" placeholder="" value="{{ Auth::user()->name }}">
+                    <input type="text" name="companyname" class="form-control" placeholder="" value="{{$companyinformation->companyname}}">
                     </div>
                     <div class="form-group">
                     <label for="mission">Mission</label>
@@ -73,14 +72,55 @@
                                   <p class="image_view"></p><img src="" >
                                 </div>
                     </div> 
+                    @empty 
+                    <h4 class="card-title">Company Information</h4>
+                    <input type="text" name="user_id" value="{{ Auth::user()->id }}" class="form-control" hidden>
+                    <div class="form-group">
+                    <label for="companyname">Company Name</label>
+                    <input type="text" name="companyname" class="form-control" placeholder="" value="">
+                    </div>
+                    <div class="form-group">
+                    <label for="mission">Mission</label>
+                    <input type="text" name="mission" class="form-control" value="" placeholder="" >
+                    </div>
+                    <div class="form-group">
+                    <label for="vision">Vision</label>
+                    <input type="text" name="vision" class="form-control" value="" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <label for="contactno">Contact No.</label>
+                    <input type="text" name="contactno" class="form-control" value="{{ Auth::user()->contactno }}" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" class="form-control" value="" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="form-control" value="{{ Auth::user()->email }}" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <label for="footerinformation">Footer Information</label>
+                    <input type="text" name="footerinformation" class="form-control" value="" placeholder="">
+                    </div>
+                    <div class="form-group photo">
+                            {!!Form::label('photo', 'Photo', array('class' => 'form-control-label'))!!}
+                                <div class="row">
+                                  <input id="photo" name="photo" class="photo" type="file" accept="image/x-png,image/gif,image/jpeg">
+                                </div>
+                                <div class="row">
+                                  <img class="pre_img" style="max-width:100%;height:200px" src="{{asset('storage/uploads/')}}">
+                                  <p class="image_view"></p><img src="" >
+                                </div>
+                    </div> 
+                    @endforelse
                     <div>
                         {!!Form::submit('Submit', ['id' => 'addForm','class' => 'btn btn-success mr-2']) !!}
                         <button class="btn btn-light">Cancel</button>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        @endforeach
 
     </div>
 {!! Form::close() !!}

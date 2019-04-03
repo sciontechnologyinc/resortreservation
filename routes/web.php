@@ -43,15 +43,26 @@ Route::prefix('galleries')->group(function(){
     Route::post         ('/delete/{id}',                 'GalleryController@destroy'              )->name('gallery_destroy');
 });   
 
+// Schedule
+Route::prefix('schedule')->group(function(){
+    Route::get          ('/',                            'ScheduleController@index'                )->name('gallery');
+    Route::get          ('/show',                        'ScheduleController@show'                 )->name('gallery_show');
+    Route::get          ('/create',                      'ScheduleController@create'               )->name('gallery_create');
+    Route::post         ('/store',                       'ScheduleController@store'                )->name('gallery_store');
+    Route::get          ('/{id}/edit',                   'ScheduleController@edit'                 )->name('gallery_edit');
+    Route::patch        ('/{id}/save',                   'ScheduleController@update'               )->name('gallery_update');
+    Route::post         ('/delete/{id}',                 'ScheduleController@destroy'              )->name('gallery_destroy');
+});  
 // Amount
 Route::prefix('amount')->group(function(){
-    Route::post          ('/{id}',                        'BookmassageController@amount'            )->name('gallery');
-    Route::get          ('/show',                        'GalleryController@show'                 )->name('gallery_show');
-    Route::get          ('/create',                      'GalleryController@create'               )->name('gallery_create');
+    Route::post         ('/{id}',                        'BookmassageController@amount'           )->name('gallery');
+    Route::post         ('reserve/{id}',                 'BookmassageController@codeReserved'     )->name('gallery_show');
+    Route::post         ('activate/{id}',                'AccountController@activate'             )->name('gallery_show');
     Route::post         ('/store',                       'GalleryController@store'                )->name('gallery_store');
     Route::get          ('/{id}/edit',                   'GalleryController@edit'                 )->name('gallery_edit');
     Route::patch        ('/{id}/save',                   'GalleryController@update'               )->name('gallery_update');
     Route::post         ('/delete/{id}',                 'GalleryController@destroy'              )->name('gallery_destroy');
+    Route::post         ('/package/{id}',                'PackageController@description'              )->name('gallery_destroy');
 }); 
 
     // Notification
@@ -186,6 +197,9 @@ Route::get('profile', function () {
     return view('website.pages.profile');
 });
 
+Route::get('inactive', function () {
+    return view('admin.pages.inactive');
+});
 
 Auth::routes();
 Route::get('bookmassages','BookmassageController@index');
@@ -216,13 +230,15 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::get('dashboard.index', function (){
-    if (Auth::user()->admin == 0){
-        return view('home.index');
-    }else if (Auth::user()->admin == 1){
-        return view('dashboard.index', $users);
-    }else{
+    if (Auth::user()->active == '0'){
+        return view('inactive');
+    }else if (Auth::user()->admin == 2 || Auth::user()->admin == 1){
         return view('dashboard.index', $users);
     }
+
 });
+
+Route::post('/login', 'Auth\LoginController@credentials');
+
 Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);

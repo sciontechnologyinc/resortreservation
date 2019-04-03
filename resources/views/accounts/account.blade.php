@@ -26,6 +26,7 @@
                           <th>Resort Name</th>
                           <th>Email</th>
                           <th>Contact No.</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -36,12 +37,20 @@
                           <td>{{ $account->name }}</td>
                           <td>{{ $account->email }}</td>
                           <td>{{ $account->contactno }}</td>
+                          @if($account->active == '0')
+                          <td>Inactive</td>
+                          @else 
+                          <td>Active</td>
+                          @endif
                           <td>
                           <div class="form-group" style="display:inline-flex">
                           <a rel="tooltip" title="Edit" class="btn btn-success btn-sm mr-1" href="accounts/{!! $account->id !!}/edit"><i class="fa fa-edit"></i></a>
                           {!! Form::open(['id' => 'deleteForm', 'method' => 'DELETE', 'url' => '/resorts/' . $account->id]) !!}
                           {{ Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'rel' => 'tooltip', 'title' => 'Delete'] )  }}
                           {!! Form::close() !!}
+                          &nbsp
+                          <a rel="tooltip" title="Activate Account" class="btn btn-warning btn-sm mr-1 activate" value="{{$account->active}}" id="{{$account->id}}"><i class="fa fa-key"></i></a>
+
                           </div>
                           </td>
                         </tr>
@@ -54,4 +63,5 @@
             </div>
     </div>
 </div>
+
 @endsection

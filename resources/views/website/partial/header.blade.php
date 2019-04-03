@@ -1,7 +1,5 @@
 <header class="header">
 		<div class="header_content">
-
-			<!-- Logo -->
 			<div class="logo_container d-flex flex-column align-items-center justify-content-center">
 				<div class="logo" style="color: wheat">
                         @yield('headerLogo')
@@ -15,9 +13,6 @@
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-center justify-content-start">
 									@yield('header')
-                    {{-- <a class="nav-link dropdown profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-top: 20px;">
-                        <i class="fa fa-user"></i>
-                    </a> --}}
                     @if ($user = Auth::user())
                     <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{ url('website/pages/reservation') }}"><i class="fa fa-user"></i> Reservations</a>

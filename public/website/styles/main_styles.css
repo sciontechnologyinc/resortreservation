@@ -329,11 +329,8 @@
 *********************************/
     
     .header {
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
-        background: #00a0f3;
+        background: #4065b4;
         z-index: 100;
     }
     
@@ -1622,7 +1619,7 @@
         width: 276px;
         text-align: center;
         border-bottom: 1.5px solid;
-        color: #f1e8e8;
+        color: black;
         font-family: blacksword;
         padding-top: 42px;
     }

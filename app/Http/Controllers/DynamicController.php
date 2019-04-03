@@ -5,7 +5,9 @@ use Illuminate\Http\Request;
 use App\Companyinformation;
 use App\Gallery;
 use App\User;
+use App\Schedule;
 use App\Packages;
+use Auth;
 use App\Bookmassage;
 class DynamicController extends Controller
 {
@@ -44,7 +46,8 @@ class DynamicController extends Controller
     public function aboutus($id)
     {
         $companyinformation = Companyinformation::where("user_id",$id)->orderBy('id')->get();
-        return view('website.pages.aboutus', ['companyinformation' => $companyinformation]);
+        $schedules = Schedule::where('users_id',$id)->get();
+        return view('website.pages.aboutus', compact('companyinformation','schedules'));
     }
     public function services($id)
     {
@@ -101,15 +104,17 @@ class DynamicController extends Controller
      */
     public function notification()
     {
-        $notification = User::where("notification",'0')->orderBy('created_at')->get();
-        $reservation = Bookmassage::where("notification",'0')->orderBy('created_at')->get();
-        return response()->json(['success' => true, 'notification' => $notification,'reservation' => $reservation]);
-        
+            $notification = User::where('notification','0')->get();
+            $number = User::where('notification', '0')->count();
+            $reservednumber = Bookmassage::where('notification', '0')->where('user_id',Auth::user()->id)->count();
+            $reservation = Bookmassage::where("notification",'0')->orderBy('created_at')->get();
+
+            return response()->json(['success' => true, 'notification' => $notification, 'reservation' => $reservation,'number' => $number,'reservednumber' => $reservednumber]);
     }
     
     public function notificationupdate()
     {
         $notification = User::where('notification', '0')->update(request()->all());
-        $reservation = Bookmassage::where('notification', '0')->update(request()->all());
+        $reservation = Bookmassage::where('notification', '0')->where('user_id',Auth::user()->id)->update(request()->all());
     }
 }

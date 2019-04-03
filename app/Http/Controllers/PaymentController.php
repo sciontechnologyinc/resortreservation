@@ -21,6 +21,7 @@ use App\Packages;
 use Redirect;
 use Session;
 use DB;
+use Nexmo;
 use URL;
 
 class PaymentController extends Controller
@@ -152,6 +153,11 @@ class PaymentController extends Controller
         }
  
         \Session::put('error', 'Unknown error occurred');
+        Nexmo::message()->send([
+            'to'   => '639215128314',
+            'from' => 'SJDMB',
+            'text' => 'Reservation Failed. Please try again !'
+        ]);
         return Redirect::to('/');
  
     }
@@ -167,7 +173,11 @@ class PaymentController extends Controller
 
             \Session::put('error', 'Payment failed');
             $paypalamount = Bookmassage::latest()->limit(1)->delete();  
-            
+            Nexmo::message()->send([
+                'to'   => '639215128314',
+                'from' => 'SJDMB',
+                'text' => 'Reservation Failed. Please try again !'
+            ]);
             return Redirect::to('/');
         }
 
@@ -186,12 +196,22 @@ class PaymentController extends Controller
             ->limit(1)
             ->update(['status' => "Paid"]);
             $resort = Bookmassage::orderBy('id','desc')->latest()->limit(1)->get();
+            Nexmo::message()->send([
+                'to'   => '639215128314',
+                'from' => 'SJDMB',
+                'text' => 'Reserved Successfully ! Your Reservation Code is : '.$resort[0]->code.'Enter your code to "ortreservation.xyz" for checking of your reservation. Thanks !'
+            ]);
             return Redirect::to('/');
 
         }
 
         \Session::put('error', 'Payment failed');
         $resort = Bookmassage::orderBy('id','desc')->latest()->limit(1)->get();
+            Nexmo::message()->send([
+                'to'   => '639215128314',
+                'from' => 'SJDMB',
+                'text' => 'Reservation Failed. Please try again !'
+            ]);
             return Redirect::to('/');
     }
 }
